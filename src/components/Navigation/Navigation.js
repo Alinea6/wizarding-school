@@ -2,7 +2,7 @@ import React from 'react';
 import {Container, Row, Col} from 'react-bootstrap';
 import './Navigation.css';
 
-const Navigation = () => {
+const Navigation = ({ onLoggedInChange}) => {
     return (
         <nav style={{ display: 'grid'}}>
             <Container className='ba bw2'>
@@ -43,7 +43,7 @@ const Navigation = () => {
                     <Col className='pa0 ba bg-black hover: dim'>
                         <p className='tc f4 silver link pointer'>{'Ustawienia'}</p>
                     </Col>
-                    <Col className='pa0 ba bg-black hover: dim'>
+                    <Col onClick= {() => onLoggedInChange(false)} className='pa0 ba bg-black hover: dim'>
                         <p className='tc f4 silver link pointer'>{'Wyloguj'}</p>
                     </Col>
                 </Row>

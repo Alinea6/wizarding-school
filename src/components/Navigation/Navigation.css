@@ -2,6 +2,10 @@ nav {
     padding-top: 2rem;
 }
 
+Link:hover {
+    text-decoration: none;
+}
+
 Col {
     justify-content: center;
 }

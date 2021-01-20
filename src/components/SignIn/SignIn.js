@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const SignIn = () => {
+const SignIn = ({ onLoggedInChange}) => {
     return (
         <main className="pa4 black-80">
             <form className="measure center">
@@ -16,7 +17,11 @@ const SignIn = () => {
                 </div>
                 </fieldset>
                 <div className="">
-                <input className="b ph3 pv2 input-reset ba b--black bg-black grow pointer f6 silver dib" type="submit" value="Zaloguj" />
+                <Link to='/home'><input 
+                onClick={ () => onLoggedInChange(true)}
+                className="b ph3 pv2 input-reset ba b--black bg-black grow pointer f6 silver dib" 
+                type="submit" 
+                value="Zaloguj" /></Link>
                 </div>
                 <div className="lh-copy mt3">
                 <a href="#0" class="f6 silver link dim black db">Zarejestruj się</a>

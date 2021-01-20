@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import {Container, Row, Col} from 'react-bootstrap';
 import Navigation from './components/Navigation/Navigation';
 import ProfileSummary from './components/ProfileSummary/ProfileSummary';
@@ -7,24 +8,51 @@ import './App.css';
 
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      loggedIn: false
+    }
+  }
+
+  onLoggedInChange=(loggedInChange) =>{
+    this.setState({loggedIn: loggedInChange});
+  }
+
   render() {
     return (
-      <Container className="App pa1">
-          <Row>
-            <Col xs={12} sm={12} md={5} lg={5} xl={5} className='col-sm-12 col-md-12 col-lg-5 col-xl-5'>  
-              <ProfileSummary />
-            </Col>
-            <Col xs={12} sm={12} md={7} lg={7} xl={7} className='col-sm-12 col-md-12 col-lg-7 col-xl-7'>
-              <Navigation />
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <SignIn />
-            </Col>
-          </Row>
-        {/* <Location /> */}
-      </Container>
+      <BrowserRouter>
+        <Switch>
+        <Route path="/login">
+          <SignIn onLoggedInChange={ this.onLoggedInChange }/>
+        </Route>
+        <Route path='/home'>
+          { !this.state.loggedIn 
+            ?<Redirect to='/login' />
+            :<Container className="App pa1">
+              <Row>
+                <Col xs={12} sm={12} md={5} lg={5} xl={5} className='col-sm-12 col-md-12 col-lg-5 col-xl-5'>  
+                  <ProfileSummary />
+                </Col>
+                <Col xs={12} sm={12} md={7} lg={7} xl={7} className='col-sm-12 col-md-12 col-lg-7 col-xl-7'>
+                  <Navigation onLoggedInChange={ this.onLoggedInChange }/>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                {/* <Location /> */} 
+                </Col>
+              </Row>
+            </Container>
+          }
+          </Route>
+          <Route exact path='/'>
+            { !this.state.loggedIn
+            ?<Redirect to='/login' />
+            : <Redirect to='home' />}
+          </Route>  
+        </Switch>
+    </BrowserRouter>
     );
   }
 }

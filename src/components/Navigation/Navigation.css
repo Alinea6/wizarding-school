@@ -1,3 +1,7 @@
 nav {
-    display: grid;
+    padding-top: 2rem;
+}
+
+Col {
+    justify-content: center;
 }

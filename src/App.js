@@ -4,6 +4,7 @@ import {Container, Row, Col} from 'react-bootstrap';
 import Navigation from './components/Navigation/Navigation';
 import ProfileSummary from './components/ProfileSummary/ProfileSummary';
 import SignIn from './components/SignIn/SignIn';
+import Register from './components/Register/Register';
 import './App.css';
 
 
@@ -20,14 +21,18 @@ class App extends Component {
   }
 
   render() {
+    const { loggedIn } = this.state;
     return (
       <BrowserRouter>
         <Switch>
         <Route path="/login">
           <SignIn onLoggedInChange={ this.onLoggedInChange }/>
         </Route>
+        <Route path='/register'>
+          <Register />
+        </Route>
         <Route path='/home'>
-          { !this.state.loggedIn 
+          { !loggedIn 
             ?<Redirect to='/login' />
             :<Container className="App pa1">
               <Row>
@@ -47,7 +52,7 @@ class App extends Component {
           }
           </Route>
           <Route exact path='/'>
-            { !this.state.loggedIn
+            { !loggedIn
             ?<Redirect to='/login' />
             : <Redirect to='home' />}
           </Route>  

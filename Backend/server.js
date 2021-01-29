@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 const jwtExp = require('express-jwt');
+const bcrypt = require('bcryptjs')
+const cors = require('cors');
 
 const login = require('./controllers/login');
 const register = require('./controllers/register');
@@ -16,12 +18,13 @@ app.use(jwtExp({
     secret: accessTokenSecret, getToken: req=>req.cookies.token,
     algorithms: ['HS256']
 }).unless({path: ['/login', '/register']}))
+app.use(cors)
 
-const users = [{login: 'abc', email: 'abc@gmail.com', password: 'def', role: 'user', hp: 10}]
+const users = [{login: 'abc', email: 'abc@gmail.com', hash: '$2a$10$KrM0J5iwotXW3aP/EhSaVemyQ6tUwOUzLF1cdya0RqPrWp4HQ3RR2', role: 'user', hp: 10}]
 
-app.post('/login', (req, res) => { login.handleLogin(req, res, accessTokenSecret, jwt, users) });
+app.post('/login', (req, res) => { login.handleLogin(req, res, bcrypt, accessTokenSecret, jwt, users) });
 
-app.post('/register', (req, res) => {register.handleRegister(req, res, users)})
+app.post('/register', (req, res) => {register.handleRegister(req, res, bcrypt, users)})
 
 app.get('/profile', (req, res) => {
     res.json(users.find(u => {return u.username === req.user.username}))    

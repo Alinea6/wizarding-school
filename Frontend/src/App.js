@@ -12,7 +12,6 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      loggedIn: false
     }
   }
 
@@ -32,25 +31,22 @@ class App extends Component {
         <Route path='/register'>
           <Register />
         </Route>
-        <Route path='/home'>
-          { !loggedIn 
-            ?<Redirect to='/login' />
-            :<Container className="App pa1">
-              <Row>
-                <Col xs={12} sm={12} md={5} lg={5} xl={5} className='col-sm-12 col-md-12 col-lg-5 col-xl-5'>  
-                  <ProfileSummary />
-                </Col>
-                <Col xs={12} sm={12} md={7} lg={7} xl={7} className='col-sm-12 col-md-12 col-lg-7 col-xl-7'>
-                  <Navigation onLoggedInChange={ this.onLoggedInChange }/>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                {/* <Location /> */} 
-                </Col>
-              </Row>
-            </Container>
-          }
+        <Route path='/home'> 
+          <Container className="App pa1">
+            <Row>
+              <Col xs={12} sm={12} md={5} lg={5} xl={5} className='col-sm-12 col-md-12 col-lg-5 col-xl-5'>  
+                <ProfileSummary />
+              </Col>
+              <Col xs={12} sm={12} md={7} lg={7} xl={7} className='col-sm-12 col-md-12 col-lg-7 col-xl-7'>
+                <Navigation onLoggedInChange={ this.onLoggedInChange }/>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+              {/* <Location /> */} 
+              </Col>
+            </Row>
+          </Container>
           </Route>
           <Route exact path='/'>
             { !loggedIn

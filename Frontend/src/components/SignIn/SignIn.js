@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 
 class SignIn extends React.Component {
     constructor() {
@@ -19,15 +19,22 @@ class SignIn extends React.Component {
     }
 
     onSubmitSignIn = () => {
-        fetch('http://localhost:3000/login', {
+        fetch('http://localhost:3003/login', {
             method: 'post',
-            header: {'Content-Type': 'application/json'},
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                login: this.state.signinLogin,
+                login: this.state.signInLogin,
                 password: this.state.signInPassword
             })
         })
-        this.props.onLoggedInChange(true)
+        .then(response => response.json())
+        .then(data =>{
+            if (data.token) {
+               console.log("logged in")
+            } else {
+                console.log("Invalid username or password")
+            }
+        }).catch (error => {"error logging in"})
     }
     
     render() {
@@ -40,22 +47,22 @@ class SignIn extends React.Component {
                     <div className="mt3">
                         <label className="db fw6 lh-copy f6 silver" htmlFor="login">Login</label>
                         <input onChange = {this.onLoginChange} 
-                        className="pa2 input-reset ba bg-white hover-white w-100" 
+                        className="pa2 input-reset silver ba bg-black hover-white w-100" 
                         type="text" name="login" id="login" />
                     </div>
                     <div className="mv3">
                         <label className="db fw6 lh-copy f6 silver" htmlFor="password">Hasło</label>
                         <input onChange = {this.onPasswordChange}
-                        className="b pa2 input-reset ba bg-black hover-white w-100" 
+                        className="b pa2 input-reset silver ba bg-black hover-white w-100" 
                         type="password" name="password"  id="password" />
                     </div>
                     </fieldset>
                     <div className="">
-                    <Link to='/home'><input 
+                    <input 
                     onClick={this.onSubmitSignIn}
                     className="b ph3 pv2 input-reset ba b--black bg-black grow pointer f6 silver dib" 
                     type="submit" 
-                    value="Zaloguj" /></Link>
+                    value="Zaloguj" />
                     </div>
                     <div className="lh-copy mt3">
                     <p className="f6 silver link dim black db tl"><Link to='/register' style={{ textDecoration: 'none', color: '#999999'}}>Zarejestruj się</Link></p>

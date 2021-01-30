@@ -7,17 +7,17 @@ const Register = () => {
             <div className="measure center">
                 <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
                 <legend className="f3 silver fw6 ph0 mh0 tc">Rejestracja</legend>
-                <div class="mt3">
+                <div className="mt3">
                     <label className="db fw6 lh-copy f6 silver" htmlFor="login">Login</label>
-                    <input className="pa2 input-reset ba bg-black hover-white w-100" type="text" name="login" id="login" />
+                    <input className="pa2 input-reset ba silver bg-black hover-white w-100" type="text" name="login" id="login" />
                 </div>
                 <div className="mt3">
                     <label className="db fw6 lh-copy f6 silver" htmlFor="email-adress">Email</label>
-                    <input className="pa2 input-reset ba bg-black hover-white w-100" type="email-adress" name="email-adress" id="login" />
+                    <input className="pa2 input-reset ba silver bg-black hover-white w-100" type="email-adress" name="email-adress" id="login" />
                 </div>
                 <div className="mv3">
                     <label className="db fw6 lh-copy f6 silver" htmlFor="password">Hasło</label>
-                    <input className="b pa2 input-reset ba bg-black hover-white w-100" type="password" name="password"  id="password" />
+                    <input className="b pa2 input-reset ba silver bg-black hover-white w-100" type="password" name="password"  id="password" />
                 </div>
                 </fieldset>
                 <div className="">

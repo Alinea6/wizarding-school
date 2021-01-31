@@ -4,9 +4,9 @@ const handleLogin = (req, res, bcrypt, accessTokenSecret, jwt, users) => {
     if (user) {
         bcrypt.compare(password, user.hash).then(isMatch =>{
             if (isMatch) {
-                const token = jwt.sign({ login: user.login,  role: user.role }, accessTokenSecret, { expiresIn: '99999m' });
+                const token = jwt.sign({ login: user.login,  role: user.role }, accessTokenSecret, { expiresIn: '1d' });
                 res.cookie('token', token, { httpOnly: true })
-                res.json({"token": token})
+                res.json({"token": token, "user": user})
             } else {
                 res.json("Incorrect login or password")
             }}). catch(err => "Error logging in")

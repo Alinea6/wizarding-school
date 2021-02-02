@@ -5,6 +5,7 @@ import Navigation from './components/Navigation/Navigation';
 import ProfileSummary from './components/ProfileSummary/ProfileSummary';
 import SignIn from './components/SignIn/SignIn';
 import Register from './components/Register/Register';
+import Sorting from './components/Sorting/Sorting';
 import './App.css';
 
 
@@ -48,17 +49,17 @@ class App extends Component {
         </Route>
         <Route path='/home'> 
           <Container className="App pa1">
-            <Row>
-              <Col xs={12} sm={12} md={5} lg={5} xl={5} className='col-sm-12 col-md-12 col-lg-5 col-xl-5'>  
+            <Row className='pa3'>
+              <Col xs={12} sm={12} md={5} lg={5} xl={5}>  
                 <ProfileSummary login={this.state.user.login} hp={this.state.user.hp} />
               </Col>
-              <Col xs={12} sm={12} md={7} lg={7} xl={7} className='col-sm-12 col-md-12 col-lg-7 col-xl-7'>
-                <Navigation resetToken={ this.resetToken }/>
+              <Col xs={12} sm={12} md={7} lg={7} xl={7}>
+                <Navigation />
               </Col>
             </Row>
-            <Row>
+            <Row className='pa3'>
               <Col>
-              {/* <Location /> */} 
+              <Sorting />
               </Col>
             </Row>
           </Container>

@@ -31,6 +31,7 @@ class SignIn extends React.Component {
         .then(data =>{
             if (data.token) {
                 this.props.loadUser(data.user)
+                this.props.loadTask(data.homeTasks)
                 this.props.onLoggedInChange(true)
             } else {
                 console.log("Invalid username or password")
@@ -40,7 +41,7 @@ class SignIn extends React.Component {
     
     render() {
         {if (this.props.loggedIn) {
-            return <Redirect to='home' />
+            return <Redirect to='home/trunk' />
         } else {
             return (
                 <main className="pa4 black-80">

@@ -2,7 +2,46 @@ import React from 'react';
 import {Container, Row, Col} from 'react-bootstrap';
 
 class Sorting extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            introduction: '',
+            choice1: '',
+            choice2: '',
+            choice3: '',
+            choice4: '',
+            taskDoneText: ''
+        }
+    }
 
+    componentDidMount(){
+       fetch(this.props.fetchLink) 
+       .then(response => response.json())
+       .then(data =>{
+        this.setState({
+            introduction: data.introduction,
+            choice1: data.choice1,
+            choice2: data.choice2,
+            choice3: data.choice3,
+            choice4: data.choice4,
+            taskDoneText: data.taskDoneText
+        })
+       }).catch(error=> {"Loading error"})
+    }
+
+    onChoiceClick(choice) {
+        fetch(this.props.fetchLink, {
+            method: 'put',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                login: this.props.login,
+                choice: choice
+            })
+        }).then(response => response.json())
+        .then(data =>{
+            this.props.loadTask(data.homeTasks)
+        })
+    }
 
     render() {
         return (
@@ -12,26 +51,28 @@ class Sorting extends React.Component {
                         <p className="tc f4 moon-gray pa0">Dom</p>
                     </Col>
                 </Row>
-                <Container className='pa0'>
+                { !this.props.taskDone
+                ?<Container className='pa0'>
                     <Row className='pa1'>
-                        <p className='tj pa2 moon-gray'>Podchodzisz do umywalki w celu umycia zębów. 
-                        Twój wzrok pada na wiszące nad nią lustro, w którym widzisz swoje 
-                        odbicie. Patrząc na własną twarz, uświadamiasz sobie, że odczuwasz 
-                        lekki stres w związku z wyjazdem do szkoły, ale również ekscytację. 
-                        Zaczynasz się zastanawiać, czego najbardziej nie możesz się doczekać 
-                        po przyjeździe do Hogwartu. Po chwili dochodzisz do wniosku, że 
-                        najbardziej zależy Ci na:</p>
+                        <p className='tj pa1 moon-gray'>{this.state.introduction}</p>
                     </Row>
                     <Row>
                         <ul>
-                            <li className='moon-gray link hover: dim pointer'>przygodach, które tam przeżyjesz.</li>
-                            <li className='moon-gray link hover: dim pointer'>zostaniu najlepszym uczniem.</li>
-                            <li className='moon-gray link hover: dim pointer'>zdobywaniu wiedzy.</li>
-                            <li className='moon-gray link hover: dim pointer'>zawarciu nowych przyjaźni.</li>
+                            <li onClick={()=>this.onChoiceClick('choice1')} className='moon-gray link hover: dim pointer tj pa1'>{this.state.choice1}</li>
+                            <li onClick={()=>this.onChoiceClick('choice2')} className='moon-gray link hover: dim pointer tj pa1'>{this.state.choice2}</li>
+                            <li onClick={()=>this.onChoiceClick('choice3')} className='moon-gray link hover: dim pointer tj pa1'>{this.state.choice3}</li>
+                            <li onClick={()=>this.onChoiceClick('choice4')}className='moon-gray link hover: dim pointer tj pa1'>{this.state.choice4}</li>
                         </ul>                        
                     </Row>
-
                 </Container>
+                : <Container className='pa0'>
+                    <Row className='pa1'>
+                        <p className='tj pa2 moon-gray'>{this.state.taskDoneText}</p>
+                    </Row>
+                    <Row style={{justifyContent: 'center'}}>
+                        <p className='tc moon-gray link hover: dim pointer'>Powrót</p>
+                    </Row>
+                </Container>}
             </Container>
         )
     }

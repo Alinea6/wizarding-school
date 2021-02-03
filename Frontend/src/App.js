@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import {Container, Row, Col} from 'react-bootstrap';
-import Navigation from './components/Navigation/Navigation';
-import ProfileSummary from './components/ProfileSummary/ProfileSummary';
+import Header from './components/Header/Header';
 import SignIn from './components/SignIn/SignIn';
 import Register from './components/Register/Register';
 import Sorting from './components/Sorting/Sorting';
@@ -18,6 +17,13 @@ class App extends Component {
         login: '',
         role: '',
         hp: 0
+      },
+      home: {
+        bathroom: false, 
+        livingroom: false, 
+        garden: false,
+        frontdoor: false, 
+        trunk: false
       }
     }
   }
@@ -34,7 +40,16 @@ class App extends Component {
       hp: data.hp
     }})
   }
-  
+
+  loadTask = (data) => {
+    this.setState({home: {
+      bathroom: data.bathroom,
+      livingroom: data.livingroom,
+      garden: data.garden,
+      frontdoor: data.frontdoor,
+      trunk: data.trunk
+      }})
+  }
 
   render() {
     const { loggedIn } = this.state;
@@ -42,24 +57,75 @@ class App extends Component {
       <BrowserRouter>
         <Switch>
         <Route path="/login">
-          <SignIn onLoggedInChange={ this.onLoggedInChange} loggedIn= {this.state.loggedIn} loadUser={this.loadUser} />
+          <SignIn onLoggedInChange={ this.onLoggedInChange} 
+          loggedIn= {this.state.loggedIn} 
+          loadUser={this.loadUser}
+          loadTask={this.loadTask} />
         </Route>
         <Route path='/register'>
           <Register />
         </Route>
-        <Route path='/home'> 
+        <Route path='/home/bathroom'> 
           <Container className="App pa1">
-            <Row className='pa3'>
-              <Col xs={12} sm={12} md={5} lg={5} xl={5}>  
-                <ProfileSummary login={this.state.user.login} hp={this.state.user.hp} />
-              </Col>
-              <Col xs={12} sm={12} md={7} lg={7} xl={7}>
-                <Navigation />
-              </Col>
+            <Row>
+              <Header login={this.state.user.login} hp={this.state.user.hp}/>
             </Row>
             <Row className='pa3'>
               <Col>
-              <Sorting />
+              <Sorting login={this.state.user.login} fetchLink={'http://localhost:3003/home/bathroom'} 
+              loadTask={this.loadTask} taskDone={this.state.home.bathroom} />
+              </Col>
+            </Row>
+          </Container>
+          </Route>
+          <Route path='/home/livingroom'>
+          <Container className="App pa1">
+            <Row>
+              <Header login={this.state.user.login} hp={this.state.user.hp}/>
+            </Row>
+            <Row className='pa3'>
+              <Col>
+              <Sorting login={this.state.user.login} fetchLink={'http://localhost:3003/home/livingroom'} 
+              loadTask={this.loadTask} taskDone={this.state.home.livingroom} />
+              </Col>
+            </Row>
+          </Container>
+          </Route>
+          <Route path='/home/garden'>
+          <Container className="App pa1">
+            <Row>
+              <Header login={this.state.user.login} hp={this.state.user.hp}/>
+            </Row>
+            <Row className='pa3'>
+              <Col>
+              <Sorting login={this.state.user.login} fetchLink={'http://localhost:3003/home/garden'} 
+              loadTask={this.loadTask} taskDone={this.state.home.garden} />
+              </Col>
+            </Row>
+          </Container>
+          </Route>
+          <Route path='/home/frontdoor'>
+          <Container className="App pa1">
+            <Row>
+              <Header login={this.state.user.login} hp={this.state.user.hp}/>
+            </Row>
+            <Row className='pa3'>
+              <Col>
+              <Sorting login={this.state.user.login} fetchLink={'http://localhost:3003/home/frontdoor'} 
+              loadTask={this.loadTask} taskDone={this.state.home.frontdoor} />
+              </Col>
+            </Row>
+          </Container>
+          </Route>
+          <Route path='/home/trunk'>
+          <Container className="App pa1">
+            <Row>
+              <Header login={this.state.user.login} hp={this.state.user.hp}/>
+            </Row>
+            <Row className='pa3'>
+              <Col>
+              <Sorting login={this.state.user.login} fetchLink={'http://localhost:3003/home/trunk'} 
+              loadTask={this.loadTask} taskDone={this.state.home.trunk} />
               </Col>
             </Row>
           </Container>

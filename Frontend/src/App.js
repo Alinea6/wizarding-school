@@ -23,7 +23,9 @@ class App extends Component {
         livingroom: false, 
         garden: false,
         frontdoor: false, 
-        trunk: false
+        trunk: false, 
+        cleanroom: false, 
+        packtrunk: false
       }
     }
   }
@@ -47,7 +49,9 @@ class App extends Component {
       livingroom: data.livingroom,
       garden: data.garden,
       frontdoor: data.frontdoor,
-      trunk: data.trunk
+      trunk: data.trunk,
+      cleanroom: data.cleanroom,
+      packtrunk: data.packtrunk
       }})
   }
 
@@ -126,6 +130,32 @@ class App extends Component {
               <Col>
               <Sorting login={this.state.user.login} fetchLink={'http://localhost:3003/home/trunk'} 
               loadTask={this.loadTask} taskDone={this.state.home.trunk} />
+              </Col>
+            </Row>
+          </Container>
+          </Route>
+          <Route path='/home/cleanroom'>
+          <Container className="App pa1">
+            <Row>
+              <Header login={this.state.user.login} hp={this.state.user.hp}/>
+            </Row>
+            <Row className='pa3'>
+              <Col>
+              <Sorting login={this.state.user.login} fetchLink={'http://localhost:3003/home/cleanroom'} 
+              loadTask={this.loadTask} taskDone={this.state.home.cleanroom} />
+              </Col>
+            </Row>
+          </Container>
+          </Route>
+          <Route path='/home/packtrunk'>
+          <Container className="App pa1">
+            <Row>
+              <Header login={this.state.user.login} hp={this.state.user.hp}/>
+            </Row>
+            <Row className='pa3'>
+              <Col>
+              <Sorting login={this.state.user.login} fetchLink={'http://localhost:3003/home/packtrunk'} 
+              loadTask={this.loadTask} taskDone={this.state.home.packtrunk} />
               </Col>
             </Row>
           </Container>

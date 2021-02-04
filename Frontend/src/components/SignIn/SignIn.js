@@ -41,7 +41,7 @@ class SignIn extends React.Component {
     
     render() {
         {if (this.props.loggedIn) {
-            return <Redirect to='home/trunk' />
+            return <Redirect to='home/packtrunk' />
         } else {
             return (
                 <main className="pa4 black-80">

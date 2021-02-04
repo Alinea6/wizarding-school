@@ -21,6 +21,7 @@ class SignIn extends React.Component {
     onSubmitSignIn = () => {
         fetch('http://localhost:3003/login', {
             method: 'post',
+            credentials: 'include',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
                 login: this.state.signInLogin,
@@ -41,7 +42,7 @@ class SignIn extends React.Component {
     
     render() {
         {if (this.props.loggedIn) {
-            return <Redirect to='home/packtrunk' />
+            return <Redirect exact to='/home' />
         } else {
             return (
                 <main className="pa4 black-80">

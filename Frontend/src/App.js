@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import {Container, Row, Col} from 'react-bootstrap';
+import HomeBathroomLayout from './components/Layouts/HomeBathroomLayout';
+import HomeLivingRoomLayout from './components/Layouts/HomeLivingRoomLayout';
+import HomeLayout from './components/Layouts/HomeLayout';
 import Header from './components/Header/Header';
 import SignIn from './components/SignIn/SignIn';
 import Register from './components/Register/Register';
@@ -56,7 +59,6 @@ class App extends Component {
   }
 
   render() {
-    const { loggedIn } = this.state;
     return (
       <BrowserRouter>
         <Switch>
@@ -69,32 +71,17 @@ class App extends Component {
         <Route path='/register'>
           <Register />
         </Route>
-        <Route path='/home/bathroom'> 
-          <Container className="App pa1">
-            <Row>
-              <Header login={this.state.user.login} hp={this.state.user.hp}/>
-            </Row>
-            <Row className='pa3'>
-              <Col>
-              <Sorting login={this.state.user.login} fetchLink={'http://localhost:3003/home/bathroom'} 
-              loadTask={this.loadTask} taskDone={this.state.home.bathroom} />
-              </Col>
-            </Row>
-          </Container>
-          </Route>
-          <Route path='/home/livingroom'>
-          <Container className="App pa1">
-            <Row>
-              <Header login={this.state.user.login} hp={this.state.user.hp}/>
-            </Row>
-            <Row className='pa3'>
-              <Col>
-              <Sorting login={this.state.user.login} fetchLink={'http://localhost:3003/home/livingroom'} 
-              loadTask={this.loadTask} taskDone={this.state.home.livingroom} />
-              </Col>
-            </Row>
-          </Container>
-          </Route>
+        <Route exact path='/home'>
+          <HomeLayout login={this.state.user.login} hp={this.state.user.hp}/>
+        </Route>
+        <Route path='/home/bathroom'>
+          <HomeBathroomLayout login={this.state.user.login} hp={this.state.user.hp}
+          loadTask={this.loadTask} taskDone={this.state.home.bathroom}/>   
+        </Route>
+        <Route path='/home/livingroom'>
+          <HomeLivingRoomLayout login={this.state.user.login} hp={this.state.user.hp}
+          loadTask={this.loadTask} taskDone={this.state.home.livingroom}/>
+        </Route>
           <Route path='/home/garden'>
           <Container className="App pa1">
             <Row>
@@ -161,9 +148,7 @@ class App extends Component {
           </Container>
           </Route>
           <Route exact path='/'>
-            { !loggedIn
-            ?<Redirect to='/login' />
-            : <Redirect to='home' />}
+            <Redirect to='/login' />
           </Route>  
         </Switch>
     </BrowserRouter>

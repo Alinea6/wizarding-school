@@ -15,7 +15,9 @@ class Sorting extends React.Component {
     }
 
     componentDidMount(){
-       fetch(this.props.fetchLink) 
+       fetch(this.props.fetchLink, {
+        credentials: 'include'
+       }) 
        .then(response => response.json())
        .then(data =>{
         this.setState({
@@ -32,6 +34,7 @@ class Sorting extends React.Component {
     onChoiceClick(choice) {
         fetch(this.props.fetchLink, {
             method: 'put',
+            credentials: 'include',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
                 login: this.props.login,

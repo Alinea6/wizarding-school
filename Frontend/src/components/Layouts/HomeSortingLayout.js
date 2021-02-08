@@ -3,7 +3,7 @@ import {Container, Row, Col} from 'react-bootstrap';
 import Header from '../Header/Header';
 import Sorting from '../Sorting/Sorting';
 
-class HomeBathroomLayout extends React.Component {
+class HomeSortingLayout extends React.Component {
     render() {
         return(
             <Container className="App pa1">
@@ -12,8 +12,8 @@ class HomeBathroomLayout extends React.Component {
             </Row>
             <Row className='pa3'>
               <Col>
-              <Sorting login={this.props.login} fetchLink={'http://localhost:3003/home/bathroom'} 
-              loadTask={this.props.loadTask} taskDone={this.props.bathroom} />
+              <Sorting login={this.props.login} fetchLink={this.props.fetchLink} 
+              loadTask={this.props.loadTask} taskDone={this.props.taskDone} />
               </Col>
             </Row>
           </Container>
@@ -21,4 +21,4 @@ class HomeBathroomLayout extends React.Component {
     }
 }
 
-export default HomeBathroomLayout;
+export default HomeSortingLayout;

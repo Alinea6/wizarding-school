@@ -1,9 +1,9 @@
 import React from 'react';
 import {Container, Row, Col} from 'react-bootstrap';
 import Header from '../Header/Header';
-import Sorting from '../Sorting/Sorting';
+import HomeGarage from '../HomeGarage/HomeGarage';
 
-class HomeLivingRoomLayout extends React.Component {
+class HomeGarageLayout extends React.Component {
     render() {
         return (
             <Container className="App pa1">
@@ -12,8 +12,7 @@ class HomeLivingRoomLayout extends React.Component {
             </Row>
             <Row className='pa3'>
               <Col>
-              <Sorting login={this.props.login} fetchLink={'http://localhost:3003/home/livingroom'} 
-              loadTask={this.props.loadTask} taskDone={this.props.livingroom} />
+                <HomeGarage />
               </Col>
             </Row>
           </Container>
@@ -21,4 +20,4 @@ class HomeLivingRoomLayout extends React.Component {
     }
 }
 
-export default HomeLivingRoomLayout;
+export default HomeGarageLayout;

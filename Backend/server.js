@@ -16,6 +16,7 @@ const homeFrontDoor = require('./controllers/homeFrontDoor');
 const homeTrunk = require('./controllers/homeTrunk');
 const homeCleanRoom = require('./controllers/homeCleanRoom');
 const homePackTrunk = require('./controllers/homePackTrunk');
+const homeList = require('./controllers/homeList');
 
 const accessTokenSecret='429c55d5763d8ef60444a7faf993b285';
 
@@ -70,6 +71,8 @@ app.put('/home/cleanroom', (req, res) => {homeCleanRoom.handleHomeCleanRoom(req,
 app.get('/home/packtrunk', (req, res) => {homePackTrunk.sendHomePackTrunk(req, res)})
 
 app.put('/home/packtrunk', (req, res) => {homePackTrunk.handleHomePackTrunk(req, res, usersSorting, usersHomeTasks)})
+
+app.get('/home/list', (req, res) => {homeList.handleList(req, res, usersHomeTasks, accessTokenSecret, jwt)})
 
 app.listen(3003, () => {
     console.log("app is running on port 3003")

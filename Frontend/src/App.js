@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import {Container, Row, Col} from 'react-bootstrap';
-import HomeBathroomLayout from './components/Layouts/HomeBathroomLayout';
-import HomeLivingRoomLayout from './components/Layouts/HomeLivingRoomLayout';
 import HomeLayout from './components/Layouts/HomeLayout';
-import Header from './components/Header/Header';
 import SignIn from './components/SignIn/SignIn';
 import Register from './components/Register/Register';
-import Sorting from './components/Sorting/Sorting';
+import HomeSortingLayout from './components/Layouts/HomeSortingLayout';
+import HomeRoomLayout from './components/Layouts/HomeRoomLayout';
+import HomeGarageLayout from './components/Layouts/HomeGarageLayout';
+import HomeListLayout from './components/Layouts/HomeListLayout';
 import './App.css';
 
 
@@ -32,7 +31,6 @@ class App extends Component {
       }
     }
   }
-
 
   onLoggedInChange=(loggedInChange) =>{
     this.setState({loggedIn: loggedInChange});
@@ -74,78 +72,42 @@ class App extends Component {
         <Route exact path='/home'>
           <HomeLayout login={this.state.user.login} hp={this.state.user.hp}/>
         </Route>
+        <Route exact path='/home/room'>
+          <HomeRoomLayout login={this.state.user.login} hp={this.state.user.hp}/>
+        </Route>
+        <Route exact path='/home/garage'>
+          <HomeGarageLayout login={this.state.user.login} hp={this.state.user.hp}/>
+        </Route>
+        <Route exact path='/home/list'>
+          <HomeListLayout login={this.state.user.login} hp={this.state.user.hp}/>
+        </Route>
         <Route path='/home/bathroom'>
-          <HomeBathroomLayout login={this.state.user.login} hp={this.state.user.hp}
-          loadTask={this.loadTask} taskDone={this.state.home.bathroom}/>   
+          <HomeSortingLayout login={this.state.user.login} hp={this.state.user.hp}
+              fetchLink={'http://localhost:3003/home/bathroom'} loadTask={this.loadTask} taskDone={this.state.home.bathroom}/>   
         </Route>
         <Route path='/home/livingroom'>
-          <HomeLivingRoomLayout login={this.state.user.login} hp={this.state.user.hp}
-          loadTask={this.loadTask} taskDone={this.state.home.livingroom}/>
+          <HomeSortingLayout login={this.state.user.login} hp={this.state.user.hp}
+              fetchLink={'http://localhost:3003/home/livingroom'} loadTask={this.loadTask} taskDone={this.state.home.livingroom}/>
         </Route>
           <Route path='/home/garden'>
-          <Container className="App pa1">
-            <Row>
-              <Header login={this.state.user.login} hp={this.state.user.hp}/>
-            </Row>
-            <Row className='pa3'>
-              <Col>
-              <Sorting login={this.state.user.login} fetchLink={'http://localhost:3003/home/garden'} 
-              loadTask={this.loadTask} taskDone={this.state.home.garden} />
-              </Col>
-            </Row>
-          </Container>
+            <HomeSortingLayout login={this.state.user.login} hp={this.state.user.hp}
+              fetchLink={'http://localhost:3003/home/garden'} loadTask={this.loadTask} taskDone={this.state.home.garden}/>
           </Route>
           <Route path='/home/frontdoor'>
-          <Container className="App pa1">
-            <Row>
-              <Header login={this.state.user.login} hp={this.state.user.hp}/>
-            </Row>
-            <Row className='pa3'>
-              <Col>
-              <Sorting login={this.state.user.login} fetchLink={'http://localhost:3003/home/frontdoor'} 
-              loadTask={this.loadTask} taskDone={this.state.home.frontdoor} />
-              </Col>
-            </Row>
-          </Container>
+            <HomeSortingLayout login={this.state.user.login} hp={this.state.user.hp}
+            fetchLink={'http://localhost:3003/home/frontdoor'} loadTask={this.loadTask} taskDone={this.state.home.frontdoor}/>
           </Route>
           <Route path='/home/trunk'>
-          <Container className="App pa1">
-            <Row>
-              <Header login={this.state.user.login} hp={this.state.user.hp}/>
-            </Row>
-            <Row className='pa3'>
-              <Col>
-              <Sorting login={this.state.user.login} fetchLink={'http://localhost:3003/home/trunk'} 
-              loadTask={this.loadTask} taskDone={this.state.home.trunk} />
-              </Col>
-            </Row>
-          </Container>
+            <HomeSortingLayout login={this.state.user.login} hp={this.state.user.hp}
+              fetchLink={'http://localhost:3003/home/trunk'} loadTask={this.loadTask} taskDone={this.state.home.trunk}/>
           </Route>
           <Route path='/home/cleanroom'>
-          <Container className="App pa1">
-            <Row>
-              <Header login={this.state.user.login} hp={this.state.user.hp}/>
-            </Row>
-            <Row className='pa3'>
-              <Col>
-              <Sorting login={this.state.user.login} fetchLink={'http://localhost:3003/home/cleanroom'} 
-              loadTask={this.loadTask} taskDone={this.state.home.cleanroom} />
-              </Col>
-            </Row>
-          </Container>
+            <HomeSortingLayout login={this.state.user.login} hp={this.state.user.hp}
+              fetchLink={'http://localhost:3003/home/cleanroom'} loadTask={this.loadTask} taskDone={this.state.home.cleanroom}/>
           </Route>
           <Route path='/home/packtrunk'>
-          <Container className="App pa1">
-            <Row>
-              <Header login={this.state.user.login} hp={this.state.user.hp}/>
-            </Row>
-            <Row className='pa3'>
-              <Col>
-              <Sorting login={this.state.user.login} fetchLink={'http://localhost:3003/home/packtrunk'} 
-              loadTask={this.loadTask} taskDone={this.state.home.packtrunk} />
-              </Col>
-            </Row>
-          </Container>
+            <HomeSortingLayout login={this.state.user.login} hp={this.state.user.hp}
+              fetchLink={'http://localhost:3003/home/packtrunk'} loadTask={this.loadTask} taskDone={this.state.home.packtrunk}/>
           </Route>
           <Route exact path='/'>
             <Redirect to='/login' />

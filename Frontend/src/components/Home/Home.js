@@ -12,38 +12,38 @@ class Home extends React.Component {
                         <p className="tc f4 moon-gray pa0">Dom</p>
                     </Col>
                 </Row>
-                <Container>
+                <Container className='pa1'>
                     <Row>
                         <Col>
-                            <Link to='' style={{textDecoration: 'none'}}>
-                                <p className='moon-gray link hover:dim pointer'>Twój pokój</p>
+                            <Link to='/home/room' style={{textDecoration: 'none'}}>
+                                <p className='moon-gray link hover: dim pointer pa1'>Twój pokój</p>
                             </Link>
                         </Col>
                         <Col>
                             <Link to='/home/livingroom' style={{textDecoration: 'none'}}>
-                                <p className='moon-gray hover:dim pointer'>Salon</p>
+                                <p className='moon-gray hover: dim pointer pa1'>Salon</p>
                             </Link>
                         </Col>
                         <Col>
                             <Link to='/home/bathroom' style={{textDecoration: 'none'}}>
-                                <p className='moon-gray hover:dim pointer'>Łazienka</p>
+                                <p className='moon-gray hover: dim pointer pa1'>Łazienka</p>
                             </Link>
                         </Col>
                     </Row>
                     <Row>
                         <Col>
                             <Link to='/home/frontdoor' style={{textDecoration: 'none'}}>
-                                <p className='moon-gray hover:dim pointer'>Drzwi wejściowe</p>
+                                <p className='moon-gray hover: dim pointer pa1'>Drzwi wejściowe</p>
                             </Link>
                         </Col>
                         <Col>
-                            <Link to='' style={{textDecoration: 'none'}}>
-                                <p className='moon-gray hover:dim pointer'>Garaż</p>
+                            <Link to='/home/garage' style={{textDecoration: 'none'}}>
+                                <p className='moon-gray hover: dim pointer pa1'>Garaż</p>
                             </Link>
                         </Col>
                         <Col>
                             <Link to='/home/garden' style={{textDecoration: 'none'}}>
-                                <p className='moon-gray hover:dim pointer'>Ogród</p>
+                                <p className='moon-gray hover: dim pointer pa1'>Ogród</p>
                             </Link>
                         </Col>
                     </Row>

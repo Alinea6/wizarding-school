@@ -1,5 +1,6 @@
 import React from 'react';
 import {Container, Row, Col} from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 class Sorting extends React.Component {
     constructor() {
@@ -67,13 +68,14 @@ class Sorting extends React.Component {
                             <li onClick={()=>this.onChoiceClick('choice4')}className='moon-gray link hover: dim pointer tj pa1'>{this.state.choice4}</li>
                         </ul>                        
                     </Row>
+                    <Link exact to='/home' style={{textDecoration: 'none'}}><p className='moon-gray pa1 link hover: dim pointer'>Powrót</p></Link>
                 </Container>
                 : <Container className='pa0'>
                     <Row className='pa1'>
                         <p className='tj pa2 moon-gray'>{this.state.taskDoneText}</p>
                     </Row>
                     <Row style={{justifyContent: 'center'}}>
-                        <p className='tc moon-gray link hover: dim pointer'>Powrót</p>
+                    <Link exact to='/home' style={{textDecoration: 'none'}}><p className='moon-gray pa1 link hover: dim pointer'>Powrót</p></Link>
                     </Row>
                 </Container>}
             </Container>

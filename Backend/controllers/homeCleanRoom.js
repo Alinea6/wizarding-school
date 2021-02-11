@@ -20,7 +20,7 @@ const handleHomeCleanRoom = (req, res, usersSorting, usersHomeTasks) => {
     const {login, choice} = req.body
     userSort = usersSorting.find(u => u.login === login);
     userHomeTasks = usersHomeTasks.find(u => u.login === login);
-    if (!userHomeTask.cleanroom) {
+    if (!userHomeTasks.cleanroom) {
         if (choice === 'choice1') {
             userSort.Rav = userSort.Rav +10
         } else if (choice === 'choice2') {

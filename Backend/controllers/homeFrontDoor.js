@@ -9,7 +9,7 @@ const sendHomeFrontDoor = (req, res) => {
     const choice1 = `wyjaśnienie dziewczynce, jak następnym razem może 
     zareagować na podobną sytuację.`
     const choice2 = `zwrócenie chłopcu uwagi, że tak nie należy postępować.`
-    const choice3 = `podłożenie chłopakowi nogi, kiedy Cię mija.`
+    const choice3 = `podłożenie chłopcu nogi, kiedy Cię mija.`
     const choice4 = `pocieszenie dziewczynki.`
     const taskDoneText = `Zadanie w tej lokalizacji już zostało przez Ciebie 
     wykonane. Jeśli chcesz sprawdzić, jakie zadania pozostały do zrobienia, 

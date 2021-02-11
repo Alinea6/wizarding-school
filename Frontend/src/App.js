@@ -7,6 +7,7 @@ import HomeSortingLayout from './components/Layouts/HomeSortingLayout';
 import HomeRoomLayout from './components/Layouts/HomeRoomLayout';
 import HomeGarageLayout from './components/Layouts/HomeGarageLayout';
 import HomeListLayout from './components/Layouts/HomeListLayout';
+import HomeCarLayout from './components/Layouts/HomeCarLayout';
 import './App.css';
 
 
@@ -77,6 +78,9 @@ class App extends Component {
         </Route>
         <Route exact path='/home/garage'>
           <HomeGarageLayout login={this.state.user.login} hp={this.state.user.hp}/>
+        </Route>
+        <Route exact path='/home/car'>
+          <HomeCarLayout login={this.state.user.login} hp={this.state.user.hp}/>
         </Route>
         <Route exact path='/home/list'>
           <HomeListLayout login={this.state.user.login} hp={this.state.user.hp}/>

@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const jwtExp = require('express-jwt');
 const cors = require('cors')
 
+const getLogin = require('./utilities/getLogin')
 const login = require('./controllers/login');
 const register = require('./controllers/register');
 const logout = require('./controllers/logout');
@@ -17,6 +18,7 @@ const homeTrunk = require('./controllers/homeTrunk');
 const homeCleanRoom = require('./controllers/homeCleanRoom');
 const homePackTrunk = require('./controllers/homePackTrunk');
 const homeList = require('./controllers/homeList');
+const homeCar = require('./controllers/homeCar');
 
 const accessTokenSecret='429c55d5763d8ef60444a7faf993b285';
 
@@ -73,6 +75,8 @@ app.get('/home/packtrunk', (req, res) => {homePackTrunk.sendHomePackTrunk(req, r
 app.put('/home/packtrunk', (req, res) => {homePackTrunk.handleHomePackTrunk(req, res, usersSorting, usersHomeTasks)})
 
 app.get('/home/list', (req, res) => {homeList.handleList(req, res, usersHomeTasks, accessTokenSecret, jwt)})
+
+app.get('/home/car', (req, res) => {homeCar.handleCar(req, res, usersHomeTasks, usersSorting, accessTokenSecret, jwt, getLogin)})
 
 app.listen(3003, () => {
     console.log("app is running on port 3003")

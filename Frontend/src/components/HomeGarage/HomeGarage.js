@@ -15,10 +15,10 @@ class HomeGarage extends React.Component {
                 <Container className='pa1'>
                     <Row>
                         <ul>
-                            <Link to='home/packtrunk' style={{textDecoration: 'none'}}>
+                            <Link to='/home/packtrunk' style={{textDecoration: 'none'}}>
                                 <li className='moon-gray f5 link hover: dim pointer'>Zapakuj kufer do samochodu</li>
                             </Link>
-                            <Link to='' style={{textDecoration: 'none'}}>
+                            <Link to='/home/car' style={{textDecoration: 'none'}}>
                                 <li className='moon-gray link hover: dim pointer'>Jedź do Hogwartu</li>
                             </Link>
                         </ul>

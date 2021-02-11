@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wizarding-school-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: wizarding-school-backend
+  template:
+    metadata:
+      labels:
+        app: wizarding-school-backend
+    spec:
+      containers:
+        - name: wizarding-school-backend
+          image: registry.cloud.okteto.net/luke-biel/wizarding_school_backend:latest
+          command: ["npm", "start"]
+          ports:
+            - containerPort: 3003
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wizarding-school-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: wizarding-school-frontend
+  template:
+    metadata:
+      labels:
+        app: wizarding-school-frontend
+    spec:
+      containers:
+        - name: wizarding-school-frontend
+          image: registry.cloud.okteto.net/luke-biel/wizarding_school_frontend:latest
+          command: [ "npm", "start" ]
+          ports:
+            - containerPort: 3000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wizarding-school-backend-svc
+spec:
+  selector:
+    app: wizarding-school-backend
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 3003
+      protocol: TCP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wizarding-school-frontend-svc
+spec:
+  selector:
+    app: wizarding-school-frontend
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 3000
+      protocol: TCP
+

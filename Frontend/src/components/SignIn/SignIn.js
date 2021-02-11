@@ -19,7 +19,7 @@ class SignIn extends React.Component {
     }
 
     onSubmitSignIn = () => {
-        fetch('http://localhost:3003/login', {
+        fetch('https://localhost:3003/login', { // TODO: All fetches must use configurable address
             method: 'post',
             credentials: 'include',
             headers: {'Content-Type': 'application/json'},
@@ -39,7 +39,7 @@ class SignIn extends React.Component {
             }
         }).catch (error => {"error logging in"})
     }
-    
+
     render() {
         {if (this.props.loggedIn) {
             return <Redirect exact to='/home' />
@@ -51,22 +51,22 @@ class SignIn extends React.Component {
                         <legend className="f3 silver fw6 ph0 mh0 tc">Logowanie</legend>
                         <div className="mt3">
                             <label className="db fw6 lh-copy f6 silver" htmlFor="login">Login</label>
-                            <input onChange = {this.onLoginChange} 
-                            className="pa2 input-reset silver ba bg-black hover-white w-100" 
+                            <input onChange = {this.onLoginChange}
+                            className="pa2 input-reset silver ba bg-black hover-white w-100"
                             type="text" name="login" id="login" />
                         </div>
                         <div className="mv3">
                             <label className="db fw6 lh-copy f6 silver" htmlFor="password">Hasło</label>
                             <input onChange = {this.onPasswordChange}
-                            className="b pa2 input-reset silver ba bg-black hover-white w-100" 
+                            className="b pa2 input-reset silver ba bg-black hover-white w-100"
                             type="password" name="password"  id="password" />
                         </div>
                         </fieldset>
                         <div className="">
-                        <input 
+                        <input
                         onClick={this.onSubmitSignIn}
-                        className="b ph3 pv2 input-reset ba b--black bg-black grow pointer f6 silver dib" 
-                        type="submit" 
+                        className="b ph3 pv2 input-reset ba b--black bg-black grow pointer f6 silver dib"
+                        type="submit"
                         value="Zaloguj" />
                         </div>
                         <div className="lh-copy mt3">
@@ -78,7 +78,7 @@ class SignIn extends React.Component {
             )
         }
         }
-            
+
     }
 }
 

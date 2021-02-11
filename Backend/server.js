@@ -34,10 +34,10 @@ app.use(jwtExp({
     algorithms: ['HS256']
 }).unless({path: ['/', '/login', '/register']}))
 
-const users = [{login: 'abc', email: 'abc@gmail.com', 
+const users = [{login: 'abc', email: 'abc@gmail.com',
 hash: '$2a$10$KrM0J5iwotXW3aP/EhSaVemyQ6tUwOUzLF1cdya0RqPrWp4HQ3RR2', role: 'user', hp: 8}]
 const usersSorting=[{login: 'abc', Gryff: 0, Rav: 0, Huff: 0, Slyth: 0, }]
-const usersHomeTasks=[{login: 'abc', bathroom: false, livingroom: false, 
+const usersHomeTasks=[{login: 'abc', bathroom: false, livingroom: false,
 garden: false, frontdoor: false, trunk: false, cleanroom: false, packtrunk: false}]
 
 app.post('/login', (req, res) => {login.handleLogin(req, res, bcrypt, accessTokenSecret, jwt, users, usersHomeTasks)})

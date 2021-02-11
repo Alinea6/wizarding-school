@@ -1,0 +1,34 @@
+version: "3.7"
+
+services:
+  postgres:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: admin_ali
+      POSTGRES_PASSWORD: "1234qwer"
+    volumes:
+    - ./Backend/Migrations:/docker-entrypoint-initdb.d
+
+  backend:
+    image: wizarding-school-backend
+    build:
+      context: Backend
+      dockerfile: Dockerfile
+    command: npm start
+    ports:
+    - "3003:3003"
+    depends_on:
+      - postgres
+
+  frontend:
+    image: wizarding-school-frontend
+    build:
+      context: Frontend
+      dockerfile: Dockerfile
+    command: npm start
+    ports:
+    - "3000:3000"
+    depends_on:
+      - backend

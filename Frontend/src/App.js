@@ -8,6 +8,7 @@ import HomeRoomLayout from './components/Layouts/HomeRoomLayout';
 import HomeGarageLayout from './components/Layouts/HomeGarageLayout';
 import HomeListLayout from './components/Layouts/HomeListLayout';
 import HomeCarLayout from './components/Layouts/HomeCarLayout';
+import domain from './config';
 import './App.css';
 
 
@@ -15,6 +16,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      domain: '',
       loggedIn: false,
       user: {
         login: '',
@@ -31,6 +33,13 @@ class App extends Component {
         packtrunk: false
       }
     }
+  }
+
+  componentDidMount(){
+    const setDomain = domain()
+    this.setState({
+      domain: setDomain
+    })
   }
 
   onLoggedInChange=(loggedInChange) =>{
@@ -65,53 +74,66 @@ class App extends Component {
           <SignIn onLoggedInChange={ this.onLoggedInChange} 
           loggedIn= {this.state.loggedIn} 
           loadUser={this.loadUser}
-          loadTask={this.loadTask} />
+          loadTask={this.loadTask}
+          domain={this.state.domain} />
         </Route>
         <Route path='/register'>
-          <Register />
+          <Register domain={this.state.domain}/>
         </Route>
         <Route exact path='/home'>
-          <HomeLayout login={this.state.user.login} hp={this.state.user.hp}/>
+          <HomeLayout login={this.state.user.login} hp={this.state.user.hp} 
+          domain={this.state.domain}/>
         </Route>
         <Route exact path='/home/room'>
-          <HomeRoomLayout login={this.state.user.login} hp={this.state.user.hp}/>
+          <HomeRoomLayout login={this.state.user.login} hp={this.state.user.hp}
+          domain={this.state.domain}/>
         </Route>
         <Route exact path='/home/garage'>
-          <HomeGarageLayout login={this.state.user.login} hp={this.state.user.hp}/>
+          <HomeGarageLayout login={this.state.user.login} hp={this.state.user.hp}
+          domain={this.state.domain}/>
         </Route>
         <Route exact path='/home/car'>
-          <HomeCarLayout login={this.state.user.login} hp={this.state.user.hp}/>
+          <HomeCarLayout login={this.state.user.login} hp={this.state.user.hp}
+          domain={this.state.domain}/>
         </Route>
         <Route exact path='/home/list'>
-          <HomeListLayout login={this.state.user.login} hp={this.state.user.hp}/>
+          <HomeListLayout login={this.state.user.login} hp={this.state.user.hp}
+          domain={this.state.domain}/>
         </Route>
         <Route path='/home/bathroom'>
           <HomeSortingLayout login={this.state.user.login} hp={this.state.user.hp}
-              fetchLink={'http://localhost:3003/home/bathroom'} loadTask={this.loadTask} taskDone={this.state.home.bathroom}/>   
+              fetchLink={'home/bathroom'} domain={this.state.domain}
+              loadTask={this.loadTask} taskDone={this.state.home.bathroom}/>   
         </Route>
         <Route path='/home/livingroom'>
           <HomeSortingLayout login={this.state.user.login} hp={this.state.user.hp}
-              fetchLink={'http://localhost:3003/home/livingroom'} loadTask={this.loadTask} taskDone={this.state.home.livingroom}/>
+              fetchLink={'home/livingroom'} domain={this.state.domain}
+              loadTask={this.loadTask} taskDone={this.state.home.livingroom}/>
         </Route>
           <Route path='/home/garden'>
             <HomeSortingLayout login={this.state.user.login} hp={this.state.user.hp}
-              fetchLink={'http://localhost:3003/home/garden'} loadTask={this.loadTask} taskDone={this.state.home.garden}/>
+              fetchLink={'home/garden'} domain={this.state.domain}
+              loadTask={this.loadTask} taskDone={this.state.home.garden}/>
           </Route>
           <Route path='/home/frontdoor'>
             <HomeSortingLayout login={this.state.user.login} hp={this.state.user.hp}
-            fetchLink={'http://localhost:3003/home/frontdoor'} loadTask={this.loadTask} taskDone={this.state.home.frontdoor}/>
+            fetchLink={'home/frontdoor'} domain={this.state.domain} 
+            loadTask={this.loadTask} taskDone={this.state.home.frontdoor}/>
           </Route>
           <Route path='/home/trunk'>
             <HomeSortingLayout login={this.state.user.login} hp={this.state.user.hp}
-              fetchLink={'http://localhost:3003/home/trunk'} loadTask={this.loadTask} taskDone={this.state.home.trunk}/>
+              fetchLink={'home/trunk'} domain={this.state.domain}
+              loadTask={this.loadTask} taskDone={this.state.home.trunk}/>
           </Route>
           <Route path='/home/cleanroom'>
             <HomeSortingLayout login={this.state.user.login} hp={this.state.user.hp}
-              fetchLink={'http://localhost:3003/home/cleanroom'} loadTask={this.loadTask} taskDone={this.state.home.cleanroom}/>
+              fetchLink={'home/cleanroom'} domain={this.state.domain} 
+              loadTask={this.loadTask} taskDone={this.state.home.cleanroom}/>
           </Route>
           <Route path='/home/packtrunk'>
             <HomeSortingLayout login={this.state.user.login} hp={this.state.user.hp}
-              fetchLink={'http://localhost:3003/home/packtrunk'} loadTask={this.loadTask} taskDone={this.state.home.packtrunk}/>
+              fetchLink={'home/packtrunk'} domain={this.state.domain}
+              loadTask={this.loadTask} taskDone={this.state.home.packtrunk}/>
           </Route>
           <Route exact path='/'>
             <Redirect to='/login' />

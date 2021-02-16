@@ -12,8 +12,9 @@ class HomeSortingLayout extends React.Component {
             </Row>
             <Row className='pa3'>
               <Col>
-              <Sorting login={this.props.login} fetchLink={this.props.fetchLink} 
-              loadTask={this.props.loadTask} taskDone={this.props.taskDone} />
+              <Sorting login={this.props.login} fetchLink={this.props.fetchLink}
+              domain = {this.props.domain} loadTask={this.props.loadTask} 
+              taskDone={this.props.taskDone} />
               </Col>
             </Row>
           </Container>

@@ -1,5 +1,5 @@
-const getLogin = (token, jwt, accessTokenSecret) => {
-    var payload
+const getId = (token, jwt, accessTokenSecret) => {
+    var payload    
 	try {
         payload = jwt.verify(token, accessTokenSecret)
 	} catch (e) {
@@ -8,9 +8,9 @@ const getLogin = (token, jwt, accessTokenSecret) => {
         }
         return res.json('Bad request')
     }
-    const login = payload.login
-    return login
+    const id = payload.user_id
+    return id
 }
 module.exports = {
-    getLogin: getLogin
+    getId: getId
 }

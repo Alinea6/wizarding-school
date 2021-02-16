@@ -25,23 +25,75 @@ const sendHomeLivingRoom = (req, res) => {
     "taskDoneText": taskDoneText})
 }
 
-const handleHomeLivingRoom = (req, res, usersSorting, usersHomeTasks) => {
-    const {login, choice} = req.body
-    userSort = usersSorting.find(u => u.login === login);
-    userHomeTasks = usersHomeTasks.find(u => u.login === login);
-    if (!userHomeTasks.livingroom) {
-        if (choice === 'choice1') {
-            userSort.Huff = userSort.Huff +10
-        } else if (choice === 'choice2') {
-            userSort.Gryff = userSort.Gryff +10
-        } else if (choice === 'choice3') {
-            userSort.Rav = userSort.Rav +10
-        } else if (choice === 'choice4') {
-            userSort.Slyth = userSort.Slyth +10
-        }
-        userHomeTasks.livingroom = true
+const handleHomeLivingRoom = (req, res, accessTokenSecret, jwt, getId, database) => {
+    const choice = req.body.choice
+    const token = req.cookies.token
+    const id = getId.getId(token, jwt, accessTokenSecret)
+    database.select('*').from('house_tasks')
+    .where('user_id', '=', id)
+    .then(data => {
+        if (data[0].livingroom === false){
+            if (choice === 'choice1') {
+                return database('sorting')
+                .where('user_id', '=', id)
+                .increment('huff', 10)
+                .returning('user_id')
+                .then(sorting_id => {
+                    return database('house_tasks').where('user_id', '=', sorting_id[0])
+                    .update('livingroom', true)
+                    .returning('*')
+                    .then(tasks => {
+                        res.json({"homeTasks": tasks[0]})
+                    })
+                    .catch(err => 'error updating tasks')
+                }).catch(err => res.json('error incrementing sorting points'))
+            } else if (choice === 'choice2') {
+                return database('sorting')
+                .where('user_id', '=', id)
+                .increment('gryff', 10)
+                .returning('user_id')
+                .then(sorting_id => {
+                    return database('house_tasks').where('user_id', '=', sorting_id[0])
+                    .update('livingroom', true)
+                    .returning('*')
+                    .then(tasks => {
+                        res.json({"homeTasks": tasks[0]})
+                    })
+                    .catch(err => 'error updating tasks')
+                }).catch(err => res.json('error incrementing sorting points'))
+            } else if (choice === 'choice3') {
+                return database('sorting')
+                .where('user_id', '=', id)
+                .increment('rav', 10)
+                .returning('user_id')
+                .then(sorting_id => {
+                    return database('house_tasks').where('user_id', '=', sorting_id[0])
+                    .update('livingroom', true)
+                    .returning('*')
+                    .then(tasks => {
+                        res.json({"homeTasks": tasks[0]})
+                    })
+                    .catch(err => 'error updating tasks')
+                }).catch(err => res.json('error incrementing sorting points'))
+            } else if (choice === 'choice4') {
+                return database('sorting')
+                .where('user_id', '=', id)
+                .increment('slyth', 10)
+                .returning('user_id')
+                .then(sorting_id => {
+                    return database('house_tasks').where('user_id', '=', sorting_id[0])
+                    .update('livingroom', true)
+                    .returning('*')
+                    .then(tasks => {
+                        res.json({"homeTasks": tasks[0]})
+                    })
+                    .catch(err => 'error updating tasks')
+                }).catch(err => res.json('error incrementing sorting points'))}
+    } else {
+        res.json({"homeTasks": data[0]})
     }
-    res.json({"homeTasks": userHomeTasks})
+        }
+    )
 }
 
 module.exports = {

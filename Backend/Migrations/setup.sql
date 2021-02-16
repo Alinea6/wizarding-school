@@ -1,3 +1,4 @@
+
 CREATE TABLE IF NOT EXISTS login_data (
     user_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     username TEXT UNIQUE NOT NULL,
@@ -31,7 +32,7 @@ CREATE TYPE house_t AS enum('Gryffindor', 'Ravenclaw', 'Hufflepuff', 'Slytherin'
 
 CREATE TABLE IF NOT EXISTS character_bio (
     user_id UUID REFERENCES login_data (user_id),
-    house house_t
+    house house_t NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS house_tasks (

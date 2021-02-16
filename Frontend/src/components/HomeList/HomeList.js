@@ -17,7 +17,7 @@ class HomeList extends React.Component {
         }
     
     componentDidMount(){
-        fetch('http://localhost:3003/home/list', {
+        fetch(this.props.domain + 'home/list', {
          credentials: 'include'
         }).then(response => response.json())
         .then(data => {

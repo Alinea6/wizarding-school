@@ -18,24 +18,91 @@ const sendHomeBathroom =(req, res) => {
     "taskDoneText": taskDoneText})
 }
 
-const handleHomeBathroom=(req, res, usersSorting, usersHomeTasks)=>{
-    const {login, choice} = req.body
-    const userSort = usersSorting.find(u => {return u.login === login});
-    const userHomeTasks=usersHomeTasks.find(u => {return u.login === login})
-    if (!userHomeTasks.bathroom) {
-        if (choice === 'choice1') {
-            userSort.Gryff = userSort.Gryff +10
-        } else if (choice === 'choice2') {
-            userSort.Slyth = userSort.Slyth +10
-        } else if (choice === 'choice3') {
-        userSort.Rav = userSort.Rav+10
-        } else if (choice === 'choice4') {
-            userSort.Huff = userSort.Huff +10
-        }
-        userHomeTasks.bathroom = true
+const handleHomeBathroom=(req, res, accessTokenSecret, jwt, getId, database)=>{
+    const choice = req.body.choice
+    const token = req.cookies.token
+    const id = getId.getId(token, jwt, accessTokenSecret)
+    database.select('*').from('house_tasks')
+    .where('user_id', '=', id)
+    .then(data => {
+        if (data[0].bathroom === false){
+            if (choice === 'choice1') {
+                return database('sorting')
+                .where('user_id', '=', id)
+                .increment('gryff', 10)
+                .returning('user_id')
+                .then(sorting_id => {
+                    return database('house_tasks').where('user_id', '=', sorting_id[0])
+                    .update('bathroom', true)
+                    .returning('*')
+                    .then(tasks => {
+                        res.json({"homeTasks": tasks[0]})
+                    })
+                    .catch(err => 'error updating tasks')
+                }).catch(err => res.json('error incrementing sorting points'))
+            } else if (choice === 'choice2') {
+                return database('sorting')
+                .where('user_id', '=', id)
+                .increment('slyth', 10)
+                .returning('user_id')
+                .then(sorting_id => {
+                    return database('house_tasks').where('user_id', '=', sorting_id[0])
+                    .update('bathroom', true)
+                    .returning('*')
+                    .then(tasks => {
+                        res.json({"homeTasks": tasks[0]})
+                    })
+                    .catch(err => 'error updating tasks')
+                }).catch(err => res.json('error incrementing sorting points'))
+            } else if (choice === 'choice3') {
+                return database('sorting')
+                .where('user_id', '=', id)
+                .increment('rav', 10)
+                .returning('user_id')
+                .then(sorting_id => {
+                    return database('house_tasks').where('user_id', '=', sorting_id[0])
+                    .update('bathroom', true)
+                    .returning('*')
+                    .then(tasks => {
+                        res.json({"homeTasks": tasks[0]})
+                    })
+                    .catch(err => 'error updating tasks')
+                }).catch(err => res.json('error incrementing sorting points'))
+            } else if (choice === 'choice4') {
+                return database('sorting')
+                .where('user_id', '=', id)
+                .increment('huff', 10)
+                .returning('user_id')
+                .then(sorting_id => {
+                    return database('house_tasks').where('user_id', '=', sorting_id[0])
+                    .update('bathroom', true)
+                    .returning('*')
+                    .then(tasks => {
+                        res.json({"homeTasks": tasks[0]})
+                    })
+                    .catch(err => 'error updating tasks')
+                }).catch(err => res.json('error incrementing sorting points'))}
+        
+    } else {
+        res.json({"homeTasks": data[0]})
     }
-    res.json({"homeTasks": userHomeTasks})
-}
+        }
+    )}
+
+    //     console.log('incremented in sorting')
+    //     database('house_tasks').where('user_id', '=', id)
+    //     .update('bathroom', true)
+    //     .returning ('bathroom')
+    //     }
+    //     console.log('updated tasks', bathroom)  
+    // })
+    // .catch(err => res.json("error getting user's tasks"))
+    // database.select('*').from('house_tasks')
+    // .where('user_id', '=', id)
+    // .then(data=> {
+    //     res.json({"homeTasks": data[0]})
+    // })
+    // .catch(err=> res.json('error getting data to send to user'))
 
 module.exports = {
     sendHomeBathroom: sendHomeBathroom,

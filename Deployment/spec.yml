@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: wizarding-school-backend
-          image: registry.cloud.okteto.net/luke-biel/wizarding_school_backend:latest
+          image: registry.cloud.okteto.net/alinea6/wizarding-school-backend:latest
           command: ["npm", "start"]
           ports:
             - containerPort: 3003
@@ -25,7 +25,7 @@ kind: Deployment
 metadata:
   name: wizarding-school-frontend
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: wizarding-school-frontend
@@ -36,8 +36,11 @@ spec:
     spec:
       containers:
         - name: wizarding-school-frontend
-          image: registry.cloud.okteto.net/luke-biel/wizarding_school_frontend:latest
+          image: registry.cloud.okteto.net/alinea6/wizarding-school-frontend:latest
           command: [ "npm", "start" ]
+          env:
+            - name: REACT_APP_ENV
+              value: "production"
           ports:
             - containerPort: 3000
 

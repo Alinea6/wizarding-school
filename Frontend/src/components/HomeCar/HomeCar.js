@@ -15,7 +15,7 @@ class HomeCar extends React.Component {
     }
 
     componentDidMount(){
-        fetch('http://localhost:3003/home/car', {
+        fetch(this.props.domain + 'car', {
          credentials: 'include'
         }).then(response => response.json())
         .then(data => {

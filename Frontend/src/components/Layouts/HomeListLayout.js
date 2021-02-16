@@ -12,7 +12,7 @@ class HomeGarageLayout extends React.Component {
             </Row>
             <Row className='pa3'>
               <Col>
-                <HomeList />
+                <HomeList domain = {this.props.domain}/>
               </Col>
             </Row>
           </Container>

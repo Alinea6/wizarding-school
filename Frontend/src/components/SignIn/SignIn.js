@@ -10,6 +10,8 @@ class SignIn extends React.Component {
         }
     }
 
+    
+
     onLoginChange = (event) => {
         this.setState({signInLogin: event.target.value})
     }
@@ -19,7 +21,7 @@ class SignIn extends React.Component {
     }
 
     onSubmitSignIn = () => {
-        fetch('https://localhost:3003/login', { // TODO: All fetches must use configurable address
+        fetch(this.props.domain + 'login', { 
             method: 'post',
             credentials: 'include',
             headers: {'Content-Type': 'application/json'},
@@ -31,8 +33,6 @@ class SignIn extends React.Component {
         .then(response => response.json())
         .then(data =>{
             if (data.token) {
-                this.props.loadUser(data.user)
-                this.props.loadTask(data.homeTasks)
                 this.props.onLoggedInChange(true)
             } else {
                 console.log("Invalid username or password")
@@ -44,7 +44,7 @@ class SignIn extends React.Component {
         {if (this.props.loggedIn) {
             return <Redirect exact to='/home' />
         } else {
-            return (
+            return (               
                 <main className="pa4 black-80">
                     <div className="measure center">
                         <fieldset id="sign_up" className="ba b--transparent ph0 mh0">

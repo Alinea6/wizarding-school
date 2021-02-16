@@ -24,7 +24,7 @@ class Register extends React.Component {
     }
 
     onSubmitRegister = () => {
-        fetch('http://localhost:3003/register', {
+        fetch(this.props.domain + 'register', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -33,13 +33,10 @@ class Register extends React.Component {
                 password: this.state.password
             })
         }).then(response => response.json())
-        .then(user =>{
-            if (user.login && user.hash && user.hash) {
-                console.log("Użytkownik został pomyślnie zarejestrowany")
-            } else {
-                console.log("Błędne dane użytkownika")
-            }
-        }).catch(error => {"Error during registration"})
+        .then(data => {
+            console.log(data)
+        })
+        .catch(error => {"Error during registration"})
     }
     
     render() {

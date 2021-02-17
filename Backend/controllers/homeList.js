@@ -1,53 +1,46 @@
-const handleList = (req, res, usersHomeTasks, accessTokenSecret, jwt) => {
+const handleList = (req, res, accessTokenSecret, jwt, getId, database, queries) => {
     const token = req.cookies.token
-    var payload
-	try {
-        payload = jwt.verify(token, accessTokenSecret)
-	} catch (e) {
-		if (e instanceof jwt.JsonWebTokenError) {
-            return res.json('Unauthorized')
-        }
-        return res.json('Bad request')
-    }
-    const login = payload.login
-    const userHomeTasks=usersHomeTasks.find(u => {return u.login === login})
-    const tasks={}
-        if (userHomeTasks.bathroom) {
+    const id = getId.getId(token, jwt, accessTokenSecret)
+    const userDataPromise = queries.getUserData(database, 'house_tasks', id)
+    userDataPromise.then(data => {
+        const tasks={}
+        if (data[0].bathroom) {
             tasks.bathroom = `Poranna toaleta - wykonane`
-        } else if (!userHomeTasks.bathroom) {
+        } else if (!data[0].bathroom) {
             tasks.bathroom = `Poranna toaleta (łazienka)`
         }
-        if (userHomeTasks.livingroom) {
+        if (data[0].livingroom) {
             tasks.livingroom = `Przypomnij rodzicom o godzinie odjazdu pociągu - wykonane`
-        } else if (!userHomeTasks.livingroom) {
+        } else if (!data[0].livingroom) {
             tasks.livingroom = `Przypomnij rodzicom o godzinie odjazdu pociągu (salon)`
         }
-        if (userHomeTasks.garden) {
+        if (data[0].garden) {
             tasks.garden = `Pożegnaj się z kotem - wykonane`
-        } else if (!userHomeTasks.garden) {
+        } else if (!data[0].garden) {
             tasks.garden = `Pożegnaj się z kotem (ogród)`
         }
-        if (userHomeTasks.frontdoor) {
+        if (data[0].frontdoor) {
             tasks.frontdoor = `Idź do sklepu po pieczywo - wykonane`
-        } else if (!userHomeTasks.frontdoor) {
+        } else if (!data[0].frontdoor) {
             tasks.frontdoor = `Idź do sklepu po pieczywo (drzwi frontowe)`
         }
-        if (userHomeTasks.trunk) {
+        if (data[0].trunk) {
             tasks.trunk = `Spakuj kufer - wykonane`
-        } else if (!userHomeTasks.trunk) {
+        } else if (!data[0].trunk) {
             tasks.trunk = `Spakuj kufer (Twój pokój)`
         }
-        if (userHomeTasks.cleanroom) {
+        if (data[0].cleanroom) {
             tasks.cleanroom = `Posprzątaj pokój - wykonane`
-        } else if (!userHomeTasks.cleanroom) {
+        } else if (!data[0].cleanroom) {
             tasks.cleanroom = `Posprzątaj pokój (Twój pokój)`
         }
-        if (userHomeTasks.packtrunk) {
+        if (data[0].packtrunk) {
             tasks.packtrunk = `Zapakuj kufer do samochodu - wykonane`
-        } else if (!userHomeTasks.packtrunk) {
+        } else if (!data[0].packtrunk) {
             tasks.packtrunk = `Zapakuj kufer do samochodu (garaż)`
         }
     res.json({"list": tasks})
+    })
 }
 
 module.exports = {

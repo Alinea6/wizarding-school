@@ -18,91 +18,59 @@ const sendHomeBathroom =(req, res) => {
     "taskDoneText": taskDoneText})
 }
 
-const handleHomeBathroom=(req, res, accessTokenSecret, jwt, getId, database)=>{
+const handleHomeBathroom=(req, res, accessTokenSecret, jwt, getId, database, queries)=>{
     const choice = req.body.choice
     const token = req.cookies.token
     const id = getId.getId(token, jwt, accessTokenSecret)
-    database.select('*').from('house_tasks')
-    .where('user_id', '=', id)
-    .then(data => {
+    const userData = queries.getUserData(database, 'house_tasks', id)
+    userData.then(data => {
         if (data[0].bathroom === false){
-            if (choice === 'choice1') {
-                return database('sorting')
-                .where('user_id', '=', id)
-                .increment('gryff', 10)
-                .returning('user_id')
-                .then(sorting_id => {
-                    return database('house_tasks').where('user_id', '=', sorting_id[0])
-                    .update('bathroom', true)
-                    .returning('*')
-                    .then(tasks => {
+            if (choice === 'choice1'){
+                const incrementPromise = queries.incrementUserData(database, 'sorting', id, 
+                'gryff', 10, 'user_id')
+                incrementPromise.then(sorting_id => {
+                    const updatePromise = queries.updateUserData(database, 'house_tasks',
+                    sorting_id[0], 'bathroom', true, '*')
+                    updatePromise.then(tasks => {
                         res.json({"homeTasks": tasks[0]})
-                    })
-                    .catch(err => 'error updating tasks')
-                }).catch(err => res.json('error incrementing sorting points'))
+                    }). catch(err => res.json("error updating data"))
+                }).catch(err=> res.json("error incrementing data"))
             } else if (choice === 'choice2') {
-                return database('sorting')
-                .where('user_id', '=', id)
-                .increment('slyth', 10)
-                .returning('user_id')
-                .then(sorting_id => {
-                    return database('house_tasks').where('user_id', '=', sorting_id[0])
-                    .update('bathroom', true)
-                    .returning('*')
-                    .then(tasks => {
+                const incrementPromise = queries.incrementUserData(database, 'sorting', id, 
+                'slyth', 10, 'user_id')
+                incrementPromise.then(sorting_id => {
+                    const updatePromise = queries.updateUserData(database, 'house_tasks',
+                    sorting_id[0], 'bathroom', true, '*')
+                    updatePromise.then(tasks => {
                         res.json({"homeTasks": tasks[0]})
-                    })
-                    .catch(err => 'error updating tasks')
-                }).catch(err => res.json('error incrementing sorting points'))
+                    }).catch(err => "error updating user data")
+                }).catch(err => "error updating user data")
             } else if (choice === 'choice3') {
-                return database('sorting')
-                .where('user_id', '=', id)
-                .increment('rav', 10)
-                .returning('user_id')
-                .then(sorting_id => {
-                    return database('house_tasks').where('user_id', '=', sorting_id[0])
-                    .update('bathroom', true)
-                    .returning('*')
-                    .then(tasks => {
+                const incrementPromise = queries.incrementUserData(database, 'sorting', id, 
+                'rav', 10, 'user_id')
+                incrementPromise.then(sorting_id => {
+                    const updatePromise = queries.updateUserData(database, 'house_tasks',
+                    sorting_id[0], 'bathroom', true, '*')
+                    updatePromise.then(tasks => {
                         res.json({"homeTasks": tasks[0]})
-                    })
-                    .catch(err => 'error updating tasks')
-                }).catch(err => res.json('error incrementing sorting points'))
+                    }).catch(err => "error updating user data")
+                }).catch(err => "error incrementing data")
             } else if (choice === 'choice4') {
-                return database('sorting')
-                .where('user_id', '=', id)
-                .increment('huff', 10)
-                .returning('user_id')
-                .then(sorting_id => {
-                    return database('house_tasks').where('user_id', '=', sorting_id[0])
-                    .update('bathroom', true)
-                    .returning('*')
-                    .then(tasks => {
+                const incrementPromise = queries.incrementUserData(database, 'sorting', id, 
+                'huff', 10, 'user_id')
+                incrementPromise.then(sorting_id => {
+                    const updatePromise = queries.updateUserData(database, 'house_tasks',
+                    sorting_id[0], 'bathroom', true, '*')
+                    updatePromise.then(tasks => {
                         res.json({"homeTasks": tasks[0]})
-                    })
-                    .catch(err => 'error updating tasks')
-                }).catch(err => res.json('error incrementing sorting points'))}
-        
-    } else {
-        res.json({"homeTasks": data[0]})
-    }
+                    }).catch(error => "error updating user data")
+                }).catch("error incrementing user data")
+            }
+        } else {
+            res.json({"homeTasks": data[0]})
         }
-    )}
-
-    //     console.log('incremented in sorting')
-    //     database('house_tasks').where('user_id', '=', id)
-    //     .update('bathroom', true)
-    //     .returning ('bathroom')
-    //     }
-    //     console.log('updated tasks', bathroom)  
-    // })
-    // .catch(err => res.json("error getting user's tasks"))
-    // database.select('*').from('house_tasks')
-    // .where('user_id', '=', id)
-    // .then(data=> {
-    //     res.json({"homeTasks": data[0]})
-    // })
-    // .catch(err=> res.json('error getting data to send to user'))
+    }). catch(err => res.json("error getting user data"))
+}
 
 module.exports = {
     sendHomeBathroom: sendHomeBathroom,

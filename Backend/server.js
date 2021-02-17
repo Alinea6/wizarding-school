@@ -60,35 +60,35 @@ app.get('/logout', (req, res) => {logout.handleLogout(req, res)})
 
 app.get('/home/bathroom', (req, res) => {homeBathroom.sendHomeBathroom(req, res)})
 
-app.put('/home/bathroom', (req, res) =>{homeBathroom.handleHomeBathroom(req, res, accessTokenSecret, jwt, getId, database)})
+app.put('/home/bathroom', (req, res) =>{homeBathroom.handleHomeBathroom(req, res, accessTokenSecret, jwt, getId, database, queries)})
 
 app.get('/home/livingroom', (req, res) => {homeLivingRoom.sendHomeLivingRoom(req, res)})
 
-app.put('/home/livingroom', (req, res) =>{homeLivingRoom.handleHomeLivingRoom(req, res, accessTokenSecret, jwt, getId, database)})
+app.put('/home/livingroom', (req, res) =>{homeLivingRoom.handleHomeLivingRoom(req, res, accessTokenSecret, jwt, getId, database, queries)})
 
 app.get('/home/garden', (req, res) => {homeGarden.sendHomeGarden(req, res)})
 
-app.put('/home/garden', (req, res) =>{homeGarden.handleHomeGarden(req, res, usersSorting, usersHomeTasks)})
+app.put('/home/garden', (req, res) =>{homeGarden.handleHomeGarden(req, res, accessTokenSecret, jwt, getId, database, queries)})
 
 app.get('/home/frontdoor', (req, res) => {homeFrontDoor.sendHomeFrontDoor(req, res)})
 
-app.put('/home/frontdoor', (req, res) => {homeFrontDoor.handleHomeFrontDoor(req, res, usersSorting, usersHomeTasks)})
+app.put('/home/frontdoor', (req, res) => {homeFrontDoor.handleHomeFrontDoor(req, res, accessTokenSecret, jwt, getId, database, queries)})
 
 app.get('/home/trunk', (req, res) => {homeTrunk.sendHomeTrunk(req, res)})
 
-app.put('/home/trunk', (req, res) => {homeTrunk.handleHomeTrunk(req, res, usersSorting, usersHomeTasks)})
+app.put('/home/trunk', (req, res) => {homeTrunk.handleHomeTrunk(req, res, accessTokenSecret, jwt, getId, database, queries)})
 
 app.get('/home/cleanroom', (req, res) => {homeCleanRoom.sendHomeCleanRoom(req, res)})
 
-app.put('/home/cleanroom', (req, res) => {homeCleanRoom.handleHomeCleanRoom(req, res, usersSorting, usersHomeTasks)})
+app.put('/home/cleanroom', (req, res) => {homeCleanRoom.handleHomeCleanRoom(req, res, accessTokenSecret, jwt, getId, database, queries)})
 
 app.get('/home/packtrunk', (req, res) => {homePackTrunk.sendHomePackTrunk(req, res)})
 
-app.put('/home/packtrunk', (req, res) => {homePackTrunk.handleHomePackTrunk(req, res, usersSorting, usersHomeTasks)})
+app.put('/home/packtrunk', (req, res) => {homePackTrunk.handleHomePackTrunk(req, res, accessTokenSecret, jwt, getId, database, queries)})
 
-app.get('/home/list', (req, res) => {homeList.handleList(req, res, usersHomeTasks, accessTokenSecret, jwt)})
+app.get('/home/list', (req, res) => {homeList.handleList(req, res, accessTokenSecret, jwt, getId, database, queries)})
 
-app.get('/home/car', (req, res) => {homeCar.handleCar(req, res, usersHomeTasks, accessTokenSecret, jwt, getId, database)})
+app.get('/home/car', (req, res) => {homeCar.handleCar(req, res, accessTokenSecret, jwt, getId, database, queries)})
 
 app.listen(3003, () => {
     console.log("app is running on port 3003")

@@ -11,9 +11,6 @@ const handleLogin = (req, res, bcrypt, accessTokenSecret, jwt,
                 .then(data => {
                 const token = jwt.sign({ user_id: data[0].user_id}, accessTokenSecret, { expiresIn: '1d' });
                 res.cookie('token', token, { httpOnly: true })
-                // Tu uzupełnić też przesłanie danych z zadaniami i statsami z db albo
-                // przerzucić to do nagłówka, żeby od razu przy każdym odświeżeniu tak robiło
-                // przy czym bardziej ta druga opcja
                 res.json({"token": token})
                 })
                 .catch(err => res.json("Error getting user"))                

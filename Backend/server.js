@@ -12,6 +12,7 @@ const queries = require('./utilities/queries');
 const login = require('./controllers/login');
 const register = require('./controllers/register');
 const logout = require('./controllers/logout');
+const stats = require('./controllers/stats');
 const homeBathroom = require('./controllers/homeBathroom');
 const homeLivingRoom = require('./controllers/homeLivingRoom');
 const homeGarden = require('./controllers/homeGarden');
@@ -87,6 +88,8 @@ app.get('/home/packtrunk', (req, res) => {homePackTrunk.sendHomePackTrunk(req, r
 app.put('/home/packtrunk', (req, res) => {homePackTrunk.handleHomePackTrunk(req, res, accessTokenSecret, jwt, getId, database, queries)})
 
 app.get('/home/list', (req, res) => {homeList.handleList(req, res, accessTokenSecret, jwt, getId, database, queries)})
+
+app.get('/stats', (req, res) => {stats.handleStats(req, res, accessTokenSecret, jwt, getId, database, queries)})
 
 app.get('/home/car', (req, res) => {homeCar.handleCar(req, res, accessTokenSecret, jwt, getId, database, queries)})
 

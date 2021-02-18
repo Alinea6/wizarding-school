@@ -8,7 +8,8 @@ class HomeCarLayout extends React.Component {
         return (
             <Container className="App pa1">
             <Row>
-              <Header login={this.props.login} hp={this.props.hp}/>
+              <Header user={this.props.user} loadUser={this.props.loadUser}
+              domain={this.props.domain}/>
             </Row>
             <Row className='pa3'>
               <Col>

@@ -1,11 +1,11 @@
 nav {
-    padding-top: 2rem;
+  padding-top: 2rem;
 }
 
 Link:hover {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 Col {
-    justify-content: center;
+  justify-content: center;
 }

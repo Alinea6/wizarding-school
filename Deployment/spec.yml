@@ -37,7 +37,7 @@ spec:
       containers:
         - name: wizarding-school-frontend
           image: registry.cloud.okteto.net/alinea6/wizarding-school-frontend:latest
-          command: [ "npm", "start" ]
+          command: ["npm", "start"]
           env:
             - name: REACT_APP_ENV
               value: "production"
@@ -71,4 +71,3 @@ spec:
     - port: 80
       targetPort: 3000
       protocol: TCP
-

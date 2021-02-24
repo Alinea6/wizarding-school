@@ -9,7 +9,7 @@ services:
       POSTGRES_USER: admin_ali
       POSTGRES_PASSWORD: "1234qwer"
     volumes:
-    - ./Backend/Migrations:/docker-entrypoint-initdb.d
+      - ./Migrations:/docker-entrypoint-initdb.d
 
   backend:
     image: wizarding-school-backend
@@ -18,7 +18,7 @@ services:
       dockerfile: Dockerfile
     command: npm start
     ports:
-    - "3003:3003"
+      - "3003:3003"
     depends_on:
       - postgres
 
@@ -29,6 +29,6 @@ services:
       dockerfile: Dockerfile
     command: npm start
     ports:
-    - "3000:3000"
+      - "3000:3000"
     depends_on:
       - backend

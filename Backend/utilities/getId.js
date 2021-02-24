@@ -1,7 +1,10 @@
-const getId = (token, jwt, accessTokenSecret) => {
+const server = require('../server.js')
+const jwt = require('jsonwebtoken');
+
+const getId = (token) => {
     var payload    
 	try {
-        payload = jwt.verify(token, accessTokenSecret)
+        payload = jwt.verify(token, server.accessTokenSecret)
 	} catch (e) {
 		if (e instanceof jwt.JsonWebTokenError) {
             return res.json('Unauthorized')

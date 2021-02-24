@@ -17,7 +17,6 @@ class ProfileSummary extends React.Component {
             credentials: 'include'
            }).then(response => response.json())
            .then(data => {
-               console.log(data)
                this.props.loadUser(data)
                const healthPercentage = Math.round(data.health_points/data.max_health_points*100);
                const actionPercentage = Math.round(data.action_points/data.max_action_points*100);

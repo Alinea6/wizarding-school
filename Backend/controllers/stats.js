@@ -1,6 +1,6 @@
-const handleStats = (req, res, accessTokenSecret, jwt, getId, database, queries) => {
+const handleStats = (req, res, getId, database, queries) => {
     const token = req.cookies.token
-    const id = getId.getId(token, jwt, accessTokenSecret)
+    const id = getId.getId(token)
     database('login_data').join('stats', 'login_data.user_id', 'stats.user_id')
     .select('*').where('login_data.user_id', '=', id).then(data => {
         res.json({"login": data[0].username, "health_points": data[0].health_points,

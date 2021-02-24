@@ -1,6 +1,6 @@
-const handleList = (req, res, accessTokenSecret, jwt, getId, database, queries) => {
+const handleList = (req, res, getId, database, queries) => {
     const token = req.cookies.token
-    const id = getId.getId(token, jwt, accessTokenSecret)
+    const id = getId.getId(token)
     const userDataPromise = queries.getUserData(database, 'house_tasks', id)
     userDataPromise.then(data => {
         const tasks={}

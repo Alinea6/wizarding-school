@@ -9,10 +9,12 @@ const knex = require('knex')
 
 const getId = require('./utilities/getId');
 const queries = require('./utilities/queries');
+const auth = require('./utilities/auth');
 const login = require('./controllers/login');
 const register = require('./controllers/register');
 const logout = require('./controllers/logout');
 const stats = require('./controllers/stats');
+const sorting = require('./controllers/sorting');
 const homeBathroom = require('./controllers/homeBathroom');
 const homeLivingRoom = require('./controllers/homeLivingRoom');
 const homeGarden = require('./controllers/homeGarden');
@@ -47,13 +49,7 @@ const database = knex({
     }
   });
 
-const users = [{login: 'abc', email: 'abc@gmail.com',
-hash: '$2a$10$KrM0J5iwotXW3aP/EhSaVemyQ6tUwOUzLF1cdya0RqPrWp4HQ3RR2', role: 'user', hp: 8}]
-const usersSorting=[{login: 'abc', Gryff: 0, Rav: 0, Huff: 0, Slyth: 0, }]
-const usersHomeTasks=[{login: 'abc', bathroom: false, livingroom: false,
-garden: false, frontdoor: false, trunk: false, cleanroom: false, packtrunk: false}]
-
-app.post('/login', (req, res) => {login.handleLogin(req, res, bcrypt, accessTokenSecret, jwt, users, usersHomeTasks, database)})
+app.post('/login', (req, res) => {login.handleLogin(req, res, bcrypt, accessTokenSecret, jwt, database)})
 
 app.post('/register', (req, res) => {register.handleRegister(req, res, bcrypt, database)})
 
@@ -61,38 +57,41 @@ app.get('/logout', (req, res) => {logout.handleLogout(req, res)})
 
 app.get('/home/bathroom', (req, res) => {homeBathroom.sendHomeBathroom(req, res)})
 
-app.put('/home/bathroom', (req, res) =>{homeBathroom.handleHomeBathroom(req, res, accessTokenSecret, jwt, getId, database, queries)})
+app.put('/home/bathroom', (req, res) =>{sorting.handleSorting(req, res, database, 'bathroom', 'gryff', 'slyth', 'rav', 'huff')})
 
 app.get('/home/livingroom', (req, res) => {homeLivingRoom.sendHomeLivingRoom(req, res)})
 
-app.put('/home/livingroom', (req, res) =>{homeLivingRoom.handleHomeLivingRoom(req, res, accessTokenSecret, jwt, getId, database, queries)})
+app.put('/home/livingroom', (req, res) =>{sorting.handleSorting(req, res, database, 'livingroom', 'huff', 'gryff', 'rav', 'slyth')})
 
 app.get('/home/garden', (req, res) => {homeGarden.sendHomeGarden(req, res)})
 
-app.put('/home/garden', (req, res) =>{homeGarden.handleHomeGarden(req, res, accessTokenSecret, jwt, getId, database, queries)})
+app.put('/home/garden', (req, res) =>{sorting.handleSorting(req, res, database, 'garden', 'slyth', 'gryff', 'huff', 'rav')})
 
 app.get('/home/frontdoor', (req, res) => {homeFrontDoor.sendHomeFrontDoor(req, res)})
 
-app.put('/home/frontdoor', (req, res) => {homeFrontDoor.handleHomeFrontDoor(req, res, accessTokenSecret, jwt, getId, database, queries)})
+app.put('/home/frontdoor', (req, res) => {sorting.handleSorting(req, res, database, 'frontdoor', 'rav', 'gryff', 'slyth', 'huff')})
 
 app.get('/home/trunk', (req, res) => {homeTrunk.sendHomeTrunk(req, res)})
 
-app.put('/home/trunk', (req, res) => {homeTrunk.handleHomeTrunk(req, res, accessTokenSecret, jwt, getId, database, queries)})
+app.put('/home/trunk', (req, res) => {sorting.handleSorting(req, res, database, 'trunk', 'slyth', 'huff', 'rav', 'gryff')})
 
 app.get('/home/cleanroom', (req, res) => {homeCleanRoom.sendHomeCleanRoom(req, res)})
 
-app.put('/home/cleanroom', (req, res) => {homeCleanRoom.handleHomeCleanRoom(req, res, accessTokenSecret, jwt, getId, database, queries)})
+app.put('/home/cleanroom', (req, res) => {sorting.handleSorting(req, res, database, 'cleanroom', 'rav', 'slyth', 'huff', 'gryff')})
 
 app.get('/home/packtrunk', (req, res) => {homePackTrunk.sendHomePackTrunk(req, res)})
 
-app.put('/home/packtrunk', (req, res) => {homePackTrunk.handleHomePackTrunk(req, res, accessTokenSecret, jwt, getId, database, queries)})
+app.put('/home/packtrunk', (req, res) => {sorting.handleSorting(req, res, database, 'packtrunk', 'gryff', 'rav', 'huff', 'slyth')})
 
-app.get('/home/list', (req, res) => {homeList.handleList(req, res, accessTokenSecret, jwt, getId, database, queries)})
+app.get('/home/list', (req, res) => {homeList.handleList(req, res, getId, database, queries)})
 
-app.get('/stats', (req, res) => {stats.handleStats(req, res, accessTokenSecret, jwt, getId, database, queries)})
+app.get('/stats', (req, res) => {stats.handleStats(req, res, getId, database, queries)})
 
-app.get('/home/car', (req, res) => {homeCar.handleCar(req, res, accessTokenSecret, jwt, getId, database, queries)})
+app.get('/home/car', (req, res) => {homeCar.handleCar(req, res, getId, database, queries)})
 
 app.listen(3003, () => {
     console.log("app is running on port 3003")
 })
+
+exports.accessTokenSecret = accessTokenSecret;
+exports.database = database;

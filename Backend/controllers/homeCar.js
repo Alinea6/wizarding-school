@@ -1,6 +1,6 @@
-const handleCar = (req, res, accessTokenSecret, jwt, getId, database, queries) => {
+const handleCar = (req, res, getId, database, queries) => {
     const token = req.cookies.token
-    const id = getId.getId(token, jwt, accessTokenSecret)
+    const id = getId.getId(token)
     const userDataPromise = queries.getUserData(database, 'sorting', id)
     userDataPromise.then(data=>{
         res.json({"Gryff": data[0].gryff, "Rav": data[0].rav, 

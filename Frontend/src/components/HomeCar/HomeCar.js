@@ -15,10 +15,11 @@ class HomeCar extends React.Component {
     }
 
     componentDidMount(){
-        fetch(this.props.domain + 'car', {
+        fetch(this.props.domain + 'home/car', {
          credentials: 'include'
         }).then(response => response.json())
         .then(data => {
+            console.log(data)
             this.setState({
                 Gryff: data.Gryff,
                 Rav: data.Rav,

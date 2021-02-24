@@ -1,5 +1,5 @@
 const handleLogin = (req, res, bcrypt, accessTokenSecret, jwt, 
-    users, usersHomeTasks, database) => {
+    database) => {
     const {login, password} = req.body
     database.select('username', 'password').from('login_data')
     .where('username', '=', login)

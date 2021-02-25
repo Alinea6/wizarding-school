@@ -4,7 +4,11 @@ import "./Navigation.css";
 
 class Navigation extends React.Component {
   onLoggedOut = () => {
-    fetch("http://localhost:3003/logout");
+    fetch(this.props.domain + 'logout', {
+      credentials: "include",
+    }).then(response => {
+      window.location.href = 'http://localhost:3000/login'
+    })
   };
 
   render() {

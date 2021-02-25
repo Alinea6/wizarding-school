@@ -20,7 +20,12 @@ class HomeList extends React.Component {
     fetch(this.props.domain + "home/list", {
       credentials: "include",
     })
-      .then((response) => response.json())
+    .then((response) => {
+      if (response.ok)
+      {return response.json()} else {
+        
+        window.location.href = 'http://localhost:3000/login'; 
+      }})
       .then((data) => {
         this.setState({
           bathroomTask: data.list.bathroom,

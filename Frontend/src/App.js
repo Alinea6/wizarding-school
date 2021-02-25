@@ -16,7 +16,6 @@ class App extends Component {
     super();
     this.state = {
       domain: "",
-      loggedIn: false,
       user: {
         login: "",
         health_points: 0,
@@ -45,10 +44,6 @@ class App extends Component {
       domain: setDomain,
     });
   }
-
-  onLoggedInChange = (loggedInChange) => {
-    this.setState({ loggedIn: loggedInChange });
-  };
 
   loadUser = (data) => {
     this.setState({

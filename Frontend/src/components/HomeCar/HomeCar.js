@@ -17,9 +17,13 @@ class HomeCar extends React.Component {
     fetch(this.props.domain + "home/car", {
       credentials: "include",
     })
-      .then((response) => response.json())
+    .then((response) => {
+      if (response.ok)
+      {return response.json()} else {
+        
+        window.location.href = 'http://localhost:3000/login'; 
+      }})
       .then((data) => {
-        console.log(data);
         this.setState({
           Gryff: data.Gryff,
           Rav: data.Rav,

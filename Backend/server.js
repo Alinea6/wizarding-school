@@ -66,11 +66,11 @@ app.get("/logout", (req, res) => {
   logout.handleLogout(req, res);
 });
 
-app.get("/home/bathroom", (req, res) => {
+app.get("/home/bathroom", auth.authenticate, (req, res) => {
   homeBathroom.sendHomeBathroom(req, res);
 });
 
-app.put("/home/bathroom", (req, res) => {
+app.put("/home/bathroom", auth.authenticate, (req, res) => {
   sorting.handleSorting(
     req,
     res,
@@ -83,11 +83,11 @@ app.put("/home/bathroom", (req, res) => {
   );
 });
 
-app.get("/home/livingroom", (req, res) => {
+app.get("/home/livingroom", auth.authenticate, (req, res) => {
   homeLivingRoom.sendHomeLivingRoom(req, res);
 });
 
-app.put("/home/livingroom", (req, res) => {
+app.put("/home/livingroom", auth.authenticate, (req, res) => {
   sorting.handleSorting(
     req,
     res,
@@ -100,11 +100,11 @@ app.put("/home/livingroom", (req, res) => {
   );
 });
 
-app.get("/home/garden", (req, res) => {
+app.get("/home/garden", auth.authenticate, (req, res) => {
   homeGarden.sendHomeGarden(req, res);
 });
 
-app.put("/home/garden", (req, res) => {
+app.put("/home/garden", auth.authenticate, (req, res) => {
   sorting.handleSorting(
     req,
     res,
@@ -117,11 +117,11 @@ app.put("/home/garden", (req, res) => {
   );
 });
 
-app.get("/home/frontdoor", (req, res) => {
+app.get("/home/frontdoor", auth.authenticate, (req, res) => {
   homeFrontDoor.sendHomeFrontDoor(req, res);
 });
 
-app.put("/home/frontdoor", (req, res) => {
+app.put("/home/frontdoor", auth.authenticate, (req, res) => {
   sorting.handleSorting(
     req,
     res,
@@ -134,11 +134,11 @@ app.put("/home/frontdoor", (req, res) => {
   );
 });
 
-app.get("/home/trunk", (req, res) => {
+app.get("/home/trunk", auth.authenticate, (req, res) => {
   homeTrunk.sendHomeTrunk(req, res);
 });
 
-app.put("/home/trunk", (req, res) => {
+app.put("/home/trunk", auth.authenticate, (req, res) => {
   sorting.handleSorting(
     req,
     res,
@@ -151,11 +151,11 @@ app.put("/home/trunk", (req, res) => {
   );
 });
 
-app.get("/home/cleanroom", (req, res) => {
+app.get("/home/cleanroom", auth.authenticate, (req, res) => {
   homeCleanRoom.sendHomeCleanRoom(req, res);
 });
 
-app.put("/home/cleanroom", (req, res) => {
+app.put("/home/cleanroom", auth.authenticate, (req, res) => {
   sorting.handleSorting(
     req,
     res,
@@ -168,11 +168,11 @@ app.put("/home/cleanroom", (req, res) => {
   );
 });
 
-app.get("/home/packtrunk", (req, res) => {
+app.get("/home/packtrunk", auth.authenticate, (req, res) => {
   homePackTrunk.sendHomePackTrunk(req, res);
 });
 
-app.put("/home/packtrunk", (req, res) => {
+app.put("/home/packtrunk", auth.authenticate, (req, res) => {
   sorting.handleSorting(
     req,
     res,
@@ -185,15 +185,15 @@ app.put("/home/packtrunk", (req, res) => {
   );
 });
 
-app.get("/home/list", (req, res) => {
+app.get("/home/list", auth.authenticate, (req, res) => {
   homeList.handleList(req, res, getId, database, queries);
 });
 
-app.get("/stats", (req, res) => {
+app.get("/stats", auth.authenticate, (req, res) => {
   stats.handleStats(req, res, getId, database, queries);
 });
 
-app.get("/home/car", (req, res) => {
+app.get("/home/car", auth.authenticate, (req, res) => {
   homeCar.handleCar(req, res, getId, database, queries);
 });
 

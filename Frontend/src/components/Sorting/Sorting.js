@@ -19,7 +19,12 @@ class Sorting extends React.Component {
     fetch(this.props.domain + this.props.fetchLink, {
       credentials: "include",
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.ok)
+        {return response.json()} else {
+          
+          window.location.href = 'http://localhost:3000/login'; 
+        }})
       .then((data) => {
         this.setState({
           introduction: data.introduction,
@@ -45,7 +50,12 @@ class Sorting extends React.Component {
         choice: choice,
       }),
     })
-      .then((response) => response.json())
+    .then((response) => {
+      if (response.ok)
+      {return response.json()} else {
+        
+        window.location.href = 'http://localhost:3000/login'; 
+      }})
       .then((data) => {
         this.props.loadTask(data.homeTasks);
       });

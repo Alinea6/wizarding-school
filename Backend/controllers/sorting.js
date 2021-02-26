@@ -1,26 +1,16 @@
 const getId = require("../utilities/getId");
 const queries = require("../utilities/queries");
 
-const handleSorting = (
-  req,
-  res,
-  database,
-  task,
-  option1,
-  option2,
-  option3,
-  option4
-) => {
+const handleSorting = (req, res, task, option1, option2, option3, option4) => {
   const choice = req.body.choice;
   const token = req.cookies.token;
   const id = getId.getId(token);
-  const userData = queries.getUserData(database, "house_tasks", id);
+  const userData = queries.getUserData("house_tasks", id);
   userData
     .then((data) => {
       if (data[0][task] === false) {
         if (choice === "choice1") {
           const incrementPromise = queries.incrementUserData(
-            database,
             "sorting",
             id,
             option1,
@@ -30,7 +20,6 @@ const handleSorting = (
           incrementPromise
             .then((sorting_id) => {
               const updatePromise = queries.updateUserData(
-                database,
                 "house_tasks",
                 sorting_id[0],
                 task,
@@ -46,7 +35,6 @@ const handleSorting = (
             .catch((err) => res.json("error incrementing data"));
         } else if (choice === "choice2") {
           const incrementPromise = queries.incrementUserData(
-            database,
             "sorting",
             id,
             option2,
@@ -56,7 +44,6 @@ const handleSorting = (
           incrementPromise
             .then((sorting_id) => {
               const updatePromise = queries.updateUserData(
-                database,
                 "house_tasks",
                 sorting_id[0],
                 task,
@@ -72,7 +59,6 @@ const handleSorting = (
             .catch((err) => "error updating user data");
         } else if (choice === "choice3") {
           const incrementPromise = queries.incrementUserData(
-            database,
             "sorting",
             id,
             option3,
@@ -82,7 +68,6 @@ const handleSorting = (
           incrementPromise
             .then((sorting_id) => {
               const updatePromise = queries.updateUserData(
-                database,
                 "house_tasks",
                 sorting_id[0],
                 task,
@@ -98,7 +83,6 @@ const handleSorting = (
             .catch((err) => "error incrementing data");
         } else if (choice === "choice4") {
           const incrementPromise = queries.incrementUserData(
-            database,
             "sorting",
             id,
             option4,
@@ -108,7 +92,6 @@ const handleSorting = (
           incrementPromise
             .then((sorting_id) => {
               const updatePromise = queries.updateUserData(
-                database,
                 "house_tasks",
                 sorting_id[0],
                 task,

@@ -130,6 +130,7 @@ class App extends Component {
               fetchLink={"home/bathroom"}
               domain={this.state.domain}
               loadTask={this.loadTask}
+              task={"bathroom"}
               taskDone={this.state.home.bathroom}
             />
           </Route>
@@ -140,6 +141,7 @@ class App extends Component {
               fetchLink={"home/livingroom"}
               domain={this.state.domain}
               loadTask={this.loadTask}
+              task={"livingroom"}
               taskDone={this.state.home.livingroom}
             />
           </Route>
@@ -150,6 +152,7 @@ class App extends Component {
               fetchLink={"home/garden"}
               domain={this.state.domain}
               loadTask={this.loadTask}
+              task={"garden"}
               taskDone={this.state.home.garden}
             />
           </Route>
@@ -160,6 +163,7 @@ class App extends Component {
               fetchLink={"home/frontdoor"}
               domain={this.state.domain}
               loadTask={this.loadTask}
+              task={"frontdoor"}
               taskDone={this.state.home.frontdoor}
             />
           </Route>
@@ -170,6 +174,7 @@ class App extends Component {
               fetchLink={"home/trunk"}
               domain={this.state.domain}
               loadTask={this.loadTask}
+              task={"trunk"}
               taskDone={this.state.home.trunk}
             />
           </Route>
@@ -180,6 +185,7 @@ class App extends Component {
               fetchLink={"home/cleanroom"}
               domain={this.state.domain}
               loadTask={this.loadTask}
+              task={"cleanroom"}
               taskDone={this.state.home.cleanroom}
             />
           </Route>
@@ -190,6 +196,7 @@ class App extends Component {
               fetchLink={"home/packtrunk"}
               domain={this.state.domain}
               loadTask={this.loadTask}
+              task={"packtrunk"}
               taskDone={this.state.home.packtrunk}
             />
           </Route>

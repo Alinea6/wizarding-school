@@ -186,15 +186,15 @@ app.put("/home/packtrunk", auth.authenticate, (req, res) => {
 });
 
 app.get("/home/list", auth.authenticate, (req, res) => {
-  homeList.handleList(req, res, getId, database, queries);
+  homeList.handleList(req, res, getId, queries);
 });
 
 app.get("/stats", auth.authenticate, (req, res) => {
-  stats.handleStats(req, res, getId, database, queries);
+  stats.handleStats(req, res);
 });
 
 app.get("/home/car", auth.authenticate, (req, res) => {
-  homeCar.handleCar(req, res, getId, database, queries);
+  homeCar.handleCar(req, res, getId, queries);
 });
 
 app.listen(3003, () => {

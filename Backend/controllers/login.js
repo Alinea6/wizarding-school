@@ -1,18 +1,16 @@
+const queries = require("../utilities/queries");
+
 const handleLogin = (req, res, bcrypt, accessTokenSecret, jwt, database) => {
   const { login, password } = req.body;
-  database
-    .select("username", "password")
-    .from("login_data")
-    .where("username", "=", login)
+  const checkLoginPromise = queries.checkLogin(login);
+  checkLoginPromise
     .then((data) => {
       bcrypt
         .compare(password, data[0].password)
         .then((isMatch) => {
           if (isMatch) {
-            return database
-              .select("user_id", "username")
-              .from("login_data")
-              .where("username", "=", login)
+            const getIdAndLoginPromise = queries.getIdAndLogin(login);
+            getIdAndLoginPromise
               .then((data) => {
                 const token = jwt.sign(
                   { user_id: data[0].user_id },

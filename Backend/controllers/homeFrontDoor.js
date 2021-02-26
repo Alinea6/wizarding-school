@@ -1,3 +1,6 @@
+const getId = require("../utilities/getId");
+const queries = require("../utilities/queries");
+
 const sendHomeFrontDoor = (req, res) => {
   const introduction = `Zakładasz kurtkę i wychodzisz z domu, 
     po czym swoje kroki kierujesz w stronę pobliskiej piekarni. Zanim 
@@ -14,14 +17,20 @@ const sendHomeFrontDoor = (req, res) => {
   const taskDoneText = `Zadanie w tej lokalizacji już zostało przez Ciebie 
     wykonane. Jeśli chcesz sprawdzić, jakie zadania pozostały do zrobienia, 
     zajrzyj na listę, która znajduje się w Twoim pokoju.`;
-  res.json({
-    introduction: introduction,
-    choice1: choice1,
-    choice2: choice2,
-    choice3: choice3,
-    choice4: choice4,
-    taskDoneText: taskDoneText,
-  });
+  const token = req.cookies.token;
+  const id = getId.getId(token);
+  const userData = queries.getUserData("house_tasks", id);
+  userData.then((data) =>
+    res.json({
+      introduction: introduction,
+      choice1: choice1,
+      choice2: choice2,
+      choice3: choice3,
+      choice4: choice4,
+      taskDoneText: taskDoneText,
+      homeTasks: data[0],
+    })
+  );
 };
 
 module.exports = {

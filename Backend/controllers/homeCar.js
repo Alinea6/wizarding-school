@@ -1,7 +1,7 @@
-const handleCar = (req, res, getId, database, queries) => {
+const handleCar = (req, res, getId, queries) => {
   const token = req.cookies.token;
   const id = getId.getId(token);
-  const userDataPromise = queries.getUserData(database, "sorting", id);
+  const userDataPromise = queries.getUserData("sorting", id);
   userDataPromise
     .then((data) => {
       res.json({

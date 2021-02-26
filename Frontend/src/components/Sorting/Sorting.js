@@ -12,6 +12,7 @@ class Sorting extends React.Component {
       choice3: "",
       choice4: "",
       taskDoneText: "",
+      taskDone: false,
     };
   }
 
@@ -20,11 +21,12 @@ class Sorting extends React.Component {
       credentials: "include",
     })
       .then((response) => {
-        if (response.ok)
-        {return response.json()} else {
-          
-          window.location.href = 'http://localhost:3000/login'; 
-        }})
+        if (response.ok) {
+          return response.json();
+        } else {
+          window.location.href = "http://localhost:3000/login";
+        }
+      })
       .then((data) => {
         this.setState({
           introduction: data.introduction,
@@ -34,6 +36,9 @@ class Sorting extends React.Component {
           choice4: data.choice4,
           taskDoneText: data.taskDoneText,
         });
+        if (data.homeTasks[this.props.task]) {
+          this.setState({ taskDone: true });
+        }
       })
       .catch((error) => {
         "Loading error";
@@ -50,12 +55,13 @@ class Sorting extends React.Component {
         choice: choice,
       }),
     })
-    .then((response) => {
-      if (response.ok)
-      {return response.json()} else {
-        
-        window.location.href = 'http://localhost:3000/login'; 
-      }})
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          window.location.href = "http://localhost:3000/login";
+        }
+      })
       .then((data) => {
         this.props.loadTask(data.homeTasks);
       });

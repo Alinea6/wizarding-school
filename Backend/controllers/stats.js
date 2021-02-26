@@ -1,10 +1,18 @@
-const handleStats = (req, res, getId, database, queries) => {
+const getId = require("../utilities/getId");
+const queries = require("../utilities/queries");
+
+const handleStats = (req, res) => {
   const token = req.cookies.token;
   const id = getId.getId(token);
-  database("login_data")
-    .join("stats", "login_data.user_id", "stats.user_id")
-    .select("*")
-    .where("login_data.user_id", "=", id)
+  const joinPromise = queries.joinAndGetData(
+    "login_data",
+    "stats",
+    "login_data.user_id",
+    "stats.user_id",
+    id,
+    "*"
+  );
+  joinPromise
     .then((data) => {
       res.json({
         login: data[0].username,

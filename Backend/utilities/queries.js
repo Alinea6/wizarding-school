@@ -1,17 +1,22 @@
-async function getUserData(database, table, id) {
-  const resp = await database.select("*").from(table).where("user_id", "=", id);
+const server = require("../server.js");
+
+async function getUserData(table, id) {
+  const resp = await server.database
+    .select("*")
+    .from(table)
+    .where("user_id", "=", id);
   return resp;
 }
 
 async function incrementUserData(
-  database,
   table,
   id,
   dataToIncrement,
   incrementValue,
   returningData
 ) {
-  const resp = await database(table)
+  const resp = await server
+    .database(table)
     .where("user_id", "=", id)
     .increment(dataToIncrement, incrementValue)
     .returning(returningData);
@@ -19,17 +24,49 @@ async function incrementUserData(
 }
 
 async function updateUserData(
-  database,
   table,
   id,
   dataToUpdate,
   updatedValue,
   returningData
 ) {
-  const resp = await database(table)
+  const resp = await server
+    .database(table)
     .where("user_id", "=", id)
     .update(dataToUpdate, updatedValue)
     .returning(returningData);
+  return resp;
+}
+
+async function joinAndGetData(
+  table1,
+  table2,
+  valueToJoin1,
+  valueToJoin2,
+  id,
+  returningData
+) {
+  const resp = await server
+    .database(table1)
+    .join(table2, valueToJoin1, valueToJoin2)
+    .select(returningData)
+    .where(valueToJoin2, "=", id);
+  return resp;
+}
+
+async function checkLogin(login) {
+  const resp = await server.database
+    .select("username", "password")
+    .from("login_data")
+    .where("username", "=", login);
+  return resp;
+}
+
+async function getIdAndLogin(login) {
+  const resp = await server.database
+    .select("user_id", "username")
+    .from("login_data")
+    .where("username", "=", login);
   return resp;
 }
 
@@ -37,4 +74,7 @@ module.exports = {
   getUserData: getUserData,
   incrementUserData: incrementUserData,
   updateUserData: updateUserData,
+  joinAndGetData: joinAndGetData,
+  checkLogin: checkLogin,
+  getIdAndLogin: getIdAndLogin,
 };

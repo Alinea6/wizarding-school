@@ -1,7 +1,7 @@
-const handleList = (req, res, getId, database, queries) => {
+const handleList = (req, res, getId, queries) => {
   const token = req.cookies.token;
   const id = getId.getId(token);
-  const userDataPromise = queries.getUserData(database, "house_tasks", id);
+  const userDataPromise = queries.getUserData("house_tasks", id);
   userDataPromise.then((data) => {
     const tasks = {};
     if (data[0].bathroom) {

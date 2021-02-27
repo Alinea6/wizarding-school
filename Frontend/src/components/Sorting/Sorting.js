@@ -51,20 +51,15 @@ class Sorting extends React.Component {
       credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        login: this.props.login,
         choice: choice,
       }),
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          window.location.href = "http://localhost:3000/login";
-        }
-      })
-      .then((data) => {
-        this.props.loadTask(data.homeTasks);
-      });
+    }).then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        window.location.href = "http://localhost:3000/login";
+      }
+    });
   }
 
   render() {
@@ -75,7 +70,7 @@ class Sorting extends React.Component {
             <p className="tc f4 moon-gray pa0">Dom</p>
           </Col>
         </Row>
-        {!this.props.taskDone ? (
+        {!this.state.taskDone ? (
           <Container className="pa0">
             <Row className="pa1">
               <p className="tj pa1 moon-gray">{this.state.introduction}</p>

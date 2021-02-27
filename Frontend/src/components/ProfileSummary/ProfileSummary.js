@@ -16,12 +16,13 @@ class ProfileSummary extends React.Component {
     fetch(this.props.domain + "stats", {
       credentials: "include",
     })
-    .then((response) => {
-      if (response.ok)
-      {return response.json()} else {
-        
-        window.location.href = 'http://localhost:3000/login'; 
-      }})
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          window.location.href = "http://localhost:3000/login";
+        }
+      })
       .then((data) => {
         this.props.loadUser(data);
         const healthPercentage = Math.round(

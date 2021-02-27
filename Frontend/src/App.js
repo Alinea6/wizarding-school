@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import HomeLayout from "./components/Layouts/HomeLayout";
 import SignIn from "./components/SignIn/SignIn";
 import Register from "./components/Register/Register";
-import HomeSortingLayout from "./components/Layouts/HomeSortingLayout";
-import HomeRoomLayout from "./components/Layouts/HomeRoomLayout";
-import HomeGarageLayout from "./components/Layouts/HomeGarageLayout";
-import HomeListLayout from "./components/Layouts/HomeListLayout";
-import HomeCarLayout from "./components/Layouts/HomeCarLayout";
+import Layout from "./components/Layouts/Layout";
+import Home from "./components/Home/Home";
+import HomeCar from "./components/HomeCar/HomeCar";
+import HomeGarage from "./components/HomeGarage/HomeGarage";
+import HomeList from "./components/HomeList/HomeList";
+import HomeRoom from "./components/HomeRoom/HomeRoom";
+import Sorting from "./components/Sorting/Sorting";
 import domain from "./Config";
 import "./App.css";
 
@@ -25,15 +26,6 @@ class App extends Component {
         experience_points: 0,
         pocket: 0,
         vault: 0,
-      },
-      home: {
-        bathroom: false,
-        livingroom: false,
-        garden: false,
-        frontdoor: false,
-        trunk: false,
-        cleanroom: false,
-        packtrunk: false,
       },
     };
   }
@@ -60,20 +52,6 @@ class App extends Component {
     });
   };
 
-  loadTask = (data) => {
-    this.setState({
-      home: {
-        bathroom: data.bathroom,
-        livingroom: data.livingroom,
-        garden: data.garden,
-        frontdoor: data.frontdoor,
-        trunk: data.trunk,
-        cleanroom: data.cleanroom,
-        packtrunk: data.packtrunk,
-      },
-    });
-  };
-
   render() {
     return (
       <BrowserRouter>
@@ -89,116 +67,140 @@ class App extends Component {
             <Register domain={this.state.domain} />
           </Route>
           <Route exact path="/home">
-            <HomeLayout
+            <Layout
               user={this.state.user}
               loadUser={this.loadUser}
               domain={this.state.domain}
-            />
+            >
+              <Home />
+            </Layout>
           </Route>
           <Route exact path="/home/room">
-            <HomeRoomLayout
+            <Layout
               user={this.state.user}
               loadUser={this.loadUser}
               domain={this.state.domain}
-            />
+            >
+              <HomeRoom />
+            </Layout>
           </Route>
           <Route exact path="/home/garage">
-            <HomeGarageLayout
+            <Layout
               user={this.state.user}
               loadUser={this.loadUser}
               domain={this.state.domain}
-            />
+            >
+              <HomeGarage />
+            </Layout>
           </Route>
           <Route exact path="/home/car">
-            <HomeCarLayout
+            <Layout
               user={this.state.user}
               loadUser={this.loadUser}
               domain={this.state.domain}
-            />
+            >
+              <HomeCar domain={this.state.domain} />
+            </Layout>
           </Route>
           <Route exact path="/home/list">
-            <HomeListLayout
+            <Layout
               user={this.state.user}
               loadUser={this.loadUser}
               domain={this.state.domain}
-            />
+            >
+              <HomeList domain={this.state.domain} />
+            </Layout>
           </Route>
           <Route path="/home/bathroom">
-            <HomeSortingLayout
+            <Layout
               user={this.state.user}
               loadUser={this.loadUser}
-              fetchLink={"home/bathroom"}
               domain={this.state.domain}
-              loadTask={this.loadTask}
-              task={"bathroom"}
-              taskDone={this.state.home.bathroom}
-            />
+            >
+              <Sorting
+                fetchLink={"home/bathroom"}
+                domain={this.state.domain}
+                task={"bathroom"}
+              />
+            </Layout>
           </Route>
           <Route path="/home/livingroom">
-            <HomeSortingLayout
+            <Layout
               user={this.state.user}
               loadUser={this.loadUser}
-              fetchLink={"home/livingroom"}
               domain={this.state.domain}
-              loadTask={this.loadTask}
-              task={"livingroom"}
-              taskDone={this.state.home.livingroom}
-            />
+            >
+              <Sorting
+                fetchLink={"home/livingroom"}
+                domain={this.state.domain}
+                task={"livingroom"}
+              />
+            </Layout>
           </Route>
           <Route path="/home/garden">
-            <HomeSortingLayout
+            <Layout
               user={this.state.user}
               loadUser={this.loadUser}
-              fetchLink={"home/garden"}
               domain={this.state.domain}
-              loadTask={this.loadTask}
-              task={"garden"}
-              taskDone={this.state.home.garden}
-            />
+            >
+              <Sorting
+                fetchLink={"home/garden"}
+                domain={this.state.domain}
+                task={"garden"}
+              />
+            </Layout>
           </Route>
           <Route path="/home/frontdoor">
-            <HomeSortingLayout
+            <Layout
               user={this.state.user}
               loadUser={this.loadUser}
-              fetchLink={"home/frontdoor"}
               domain={this.state.domain}
-              loadTask={this.loadTask}
-              task={"frontdoor"}
-              taskDone={this.state.home.frontdoor}
-            />
+            >
+              <Sorting
+                fetchLink={"home/frontdoor"}
+                domain={this.state.domain}
+                task={"frontdoor"}
+              />
+            </Layout>
           </Route>
           <Route path="/home/trunk">
-            <HomeSortingLayout
+            <Layout
               user={this.state.user}
               loadUser={this.loadUser}
-              fetchLink={"home/trunk"}
               domain={this.state.domain}
-              loadTask={this.loadTask}
-              task={"trunk"}
-              taskDone={this.state.home.trunk}
-            />
+            >
+              <Sorting
+                fetchLink={"home/trunk"}
+                domain={this.state.domain}
+                task={"trunk"}
+              />
+            </Layout>
           </Route>
           <Route path="/home/cleanroom">
-            <HomeSortingLayout
+            <Layout
               user={this.state.user}
               loadUser={this.loadUser}
-              fetchLink={"home/cleanroom"}
               domain={this.state.domain}
-              loadTask={this.loadTask}
-              task={"cleanroom"}
-              taskDone={this.state.home.cleanroom}
-            />
+            >
+              <Sorting
+                fetchLink={"home/cleanroom"}
+                domain={this.state.domain}
+                task={"cleanroom"}
+              />
+            </Layout>
           </Route>
           <Route path="/home/packtrunk">
-            <HomeSortingLayout
+            <Layout
               user={this.state.user}
               loadUser={this.loadUser}
-              fetchLink={"home/packtrunk"}
               domain={this.state.domain}
-              loadTask={this.loadTask}
-              task={"packtrunk"}
-              taskDone={this.state.home.packtrunk}
-            />
+            >
+              <Sorting
+                fetchLink={"home/packtrunk"}
+                domain={this.state.domain}
+                task={"packtrunk"}
+              />
+            </Layout>
           </Route>
           <Route exact path="/">
             <Redirect to="/login" />

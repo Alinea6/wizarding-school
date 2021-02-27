@@ -6,10 +6,8 @@ class HomeCar extends React.Component {
   constructor() {
     super();
     this.state = {
-      Gryff: 0,
-      Rav: 0,
-      Huff: 0,
-      Slyth: 0,
+      homeDone: false,
+      text: "",
     };
   }
 
@@ -17,18 +15,17 @@ class HomeCar extends React.Component {
     fetch(this.props.domain + "home/car", {
       credentials: "include",
     })
-    .then((response) => {
-      if (response.ok)
-      {return response.json()} else {
-        
-        window.location.href = 'http://localhost:3000/login'; 
-      }})
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          window.location.href = "http://localhost:3000/login";
+        }
+      })
       .then((data) => {
         this.setState({
-          Gryff: data.Gryff,
-          Rav: data.Rav,
-          Huff: data.Huff,
-          Slyth: data.Slyth,
+          homeDone: data.homeDone,
+          text: data.text,
         });
       })
       .catch((error) => {
@@ -46,12 +43,16 @@ class HomeCar extends React.Component {
         </Row>
         <Container className="pa1">
           <Row>
-            <ul>
-              <li className="moon-gray">{`Gryff: ${this.state.Gryff}`}</li>
-              <li className="moon-gray">{`Rav: ${this.state.Rav}`}</li>
-              <li className="moon-gray">{`Huff: ${this.state.Huff}`}</li>
-              <li className="moon-gray">{`Slyth: ${this.state.Slyth}`}</li>
-            </ul>
+            <p className="tj moon-gray pa1">{this.state.text}</p>
+            {this.state.homeDone ? (
+              <ul>
+                <li className="moon-gray link hover: dim pointer pa1">
+                  Wsiądź do samochodu
+                </li>
+              </ul>
+            ) : (
+              <p></p>
+            )}
           </Row>
           <Link exact to="/home" style={{ textDecoration: "none" }}>
             <p className="moon-gray pa0 link hover: dim pointer">Powrót</p>

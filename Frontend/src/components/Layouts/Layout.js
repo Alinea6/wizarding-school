@@ -1,9 +1,8 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Header from "../Header/Header";
-import HomeCar from "../HomeCar/HomeCar";
 
-class HomeCarLayout extends React.Component {
+class Layout extends React.Component {
   render() {
     return (
       <Container className="App pa1">
@@ -15,13 +14,11 @@ class HomeCarLayout extends React.Component {
           />
         </Row>
         <Row className="pa3">
-          <Col>
-            <HomeCar domain={this.props.domain} />
-          </Col>
+          <Col>{this.props.children}</Col>
         </Row>
       </Container>
     );
   }
 }
 
-export default HomeCarLayout;
+export default Layout;

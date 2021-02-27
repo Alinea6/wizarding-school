@@ -1,14 +1,24 @@
 const handleCar = (req, res, getId, queries) => {
   const token = req.cookies.token;
   const id = getId.getId(token);
-  const userDataPromise = queries.getUserData("sorting", id);
+  const userDataPromise = queries.getUserData("house_tasks", id);
   userDataPromise
     .then((data) => {
+      for (let room in data[0]) {
+        if (!data[0][room]) {
+          res.json({
+            homeDone: false,
+            text: `Niestety nie możesz jeszcze jechać do Londynu, 
+            ponieważ nie skończyłeś przygotowywać się do wyjazdu. 
+            Jeśli chcesz sprawdzić, co Ci zostało do zrobienia, 
+            w Twoim pokoju znajdziesz listę zadań.`,
+          });
+        }
+      }
       res.json({
-        Gryff: data[0].gryff,
-        Rav: data[0].rav,
-        Huff: data[0].huff,
-        Slyth: data[0].slyth,
+        homeDone: true,
+        text:
+          "Wygląda na to, że jesteś już gotowy do wyjazdu. Możesz jednak spędzić jeszcze chwilę na pożegnaniach, jeśli tego chcesz. Gdy uznasz, że nadszedł już moment na wyjazd, wsiądź do samochodu.",
       });
     })
     .catch((err) => res.json("Error getting user"));

@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import SignIn from "./components/SignIn/SignIn";
 import Register from "./components/Register/Register";
 import Layout from "./components/Layouts/Layout";
+import NewUser from "./components/NewUser/NewUser";
 import Home from "./components/Home/Home";
 import HomeCar from "./components/HomeCar/HomeCar";
 import HomeGarage from "./components/HomeGarage/HomeGarage";
@@ -65,6 +66,16 @@ class App extends Component {
           </Route>
           <Route path="/register">
             <Register domain={this.state.domain} />
+          </Route>
+          <Route exact path="/new">
+            <Layout
+              user={this.state.user}
+              loadUser={this.loadUser}
+              domain={this.state.domain}
+            >
+              <NewUser 
+              domain={this.state.domain}/>
+            </Layout>
           </Route>
           <Route exact path="/home">
             <Layout

@@ -8,7 +8,8 @@ CREATE TABLE IF NOT EXISTS login_data (
 CREATE TABLE IF NOT EXISTS user_metadata (
     user_id UUID REFERENCES login_data (user_id),
     email TEXT UNIQUE NOT NULL,
-    joined TIMESTAMP NOT NULL
+    joined TIMESTAMP NOT NULL,
+    new_user BOOL DEFAULT TRUE
 );
 
 

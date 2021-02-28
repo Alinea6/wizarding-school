@@ -13,6 +13,7 @@ const auth = require("./utilities/auth");
 const login = require("./controllers/login");
 const register = require("./controllers/register");
 const logout = require("./controllers/logout");
+const newUser = require("./controllers/newUser")
 const stats = require("./controllers/stats");
 const sorting = require("./controllers/sorting");
 const homeBathroom = require("./controllers/homeBathroom");
@@ -64,6 +65,10 @@ app.post("/register", (req, res) => {
 
 app.get("/logout", (req, res) => {
   logout.handleLogout(req, res);
+});
+
+app.get("/new", auth.authenticate, (req, res) => {
+  newUser.handleNewUser(req, res);
 });
 
 app.get("/home/bathroom", auth.authenticate, (req, res) => {

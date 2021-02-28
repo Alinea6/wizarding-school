@@ -1,5 +1,5 @@
 import React from "react";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class SignIn extends React.Component {
   constructor() {
@@ -31,7 +31,11 @@ class SignIn extends React.Component {
       .then((response) => response.json())
       .then((data) => {
         if (data.token) {
-          window.location.href = 'http://localhost:3000/home'; 
+          if (data.new) {
+            window.location.href = "http://localhost:3000/new";
+          } else {
+            window.location.href = "http://localhost:3000/home";
+          }
         } else {
           console.log("Invalid username or password");
         }
@@ -60,10 +64,7 @@ class SignIn extends React.Component {
               />
             </div>
             <div className="mv3">
-              <label
-                className="db fw6 lh-copy f6 silver"
-                htmlFor="password"
-              >
+              <label className="db fw6 lh-copy f6 silver" htmlFor="password">
                 Hasło
               </label>
               <input
@@ -92,9 +93,7 @@ class SignIn extends React.Component {
                 Zarejestruj się
               </Link>
             </p>
-            <p className="f6 silver link dim black db tl">
-              Zapomniałeś hasła?
-            </p>
+            <p className="f6 silver link dim black db tl">Zapomniałeś hasła?</p>
           </div>
         </div>
       </main>

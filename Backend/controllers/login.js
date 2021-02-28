@@ -12,13 +12,19 @@ const handleLogin = (req, res, bcrypt, accessTokenSecret, jwt, database) => {
             const getIdAndLoginPromise = queries.getIdAndLogin(login);
             getIdAndLoginPromise
               .then((data) => {
-                const token = jwt.sign(
-                  { user_id: data[0].user_id },
-                  accessTokenSecret,
-                  { expiresIn: "1d" }
+                const getNewPromise = queries.getUserData(
+                  "user_metadata",
+                  data[0].user_id
                 );
-                res.cookie("token", token, { httpOnly: true });
-                res.json({ token: token });
+                getNewPromise.then((data) => {
+                  const token = jwt.sign(
+                    { user_id: data[0].user_id },
+                    accessTokenSecret,
+                    { expiresIn: "1d" }
+                  );
+                  res.cookie("token", token, { httpOnly: true });
+                  res.json({ token: token, new: data[0].new_user });
+                });
               })
               .catch((err) => res.json("Error getting user"));
           } else {

@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import domain from '../../Config';
 
 class SignIn extends React.Component {
   constructor() {
     super();
     this.state = {
       signInLogin: "",
-      signInPassword: "",
+      signInPassword: ""
     };
   }
 
@@ -19,7 +20,8 @@ class SignIn extends React.Component {
   };
 
   onSubmitSignIn = () => {
-    fetch(this.props.domain + "login", {
+    const tempdomain = domain()
+    fetch(tempdomain + "login", {
       method: "post",
       credentials: "include",
       headers: { "Content-Type": "application/json" },

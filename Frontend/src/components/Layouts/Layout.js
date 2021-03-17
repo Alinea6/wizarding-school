@@ -10,7 +10,6 @@ class Layout extends React.Component {
           <Header
             user={this.props.user}
             loadUser={this.props.loadUser}
-            domain={this.props.domain}
           />
         </Row>
         <Row className="pa3">

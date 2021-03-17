@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Row, Col, ProgressBar } from "react-bootstrap";
+import domain from '../../Config';
 import "./ProfileSummary.css";
 
 class ProfileSummary extends React.Component {
@@ -8,12 +9,13 @@ class ProfileSummary extends React.Component {
     this.state = {
       healthPercentage: 0,
       actionPercentage: 0,
-      experiencePercentage: 0,
+      experiencePercentage: 0
     };
   }
 
   componentDidMount() {
-    fetch(this.props.domain + "stats", {
+    const tempdomain = domain()
+    fetch(tempdomain + "stats", {
       credentials: "include",
     })
       .then((response) => {

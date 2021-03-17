@@ -12,7 +12,6 @@ class Header extends React.Component {
             <ProfileSummary
               user={this.props.user}
               loadUser={this.props.loadUser}
-              domain={this.props.domain}
             />
           </Col>
           <Col xs={12} sm={12} md={7} lg={7} xl={7}>

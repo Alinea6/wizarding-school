@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import domain from '../../Config';
 
 class NewUser extends React.Component {
   constructor() {
@@ -11,7 +12,8 @@ class NewUser extends React.Component {
   }
 
   componentDidMount() {
-    fetch(this.props.domain + "new", {
+    const tempdomain = domain()
+    fetch(tempdomain + "new", {
       credentials: "include",
     })
       .then((response) => {

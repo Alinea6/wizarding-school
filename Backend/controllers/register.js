@@ -29,6 +29,13 @@ const handleRegister = (req, res, bcrypt, database) => {
                 .returning("user_id");
             })
             .then((user_id) => {
+              return trx("user_location_data")
+                .insert({
+                  user_id: user_id[0]
+                })
+                .returning("user_id")
+            })
+            .then((user_id) => {
               return trx("house_tasks")
                 .insert({
                   user_id: user_id[0],

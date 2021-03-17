@@ -1,4 +1,7 @@
-const handleList = (req, res, getId, queries) => {
+const getId = require("../utilities/getId");
+const queries = require("../utilities/queries");
+
+const handleList = (req, res) => {
   const token = req.cookies.token;
   const id = getId.getId(token);
   const userDataPromise = queries.getUserData("house_tasks", id);

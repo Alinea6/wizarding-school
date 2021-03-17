@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import domain from '../../Config';
 
 class HomeList extends React.Component {
   constructor() {
@@ -17,7 +18,8 @@ class HomeList extends React.Component {
   }
 
   componentDidMount() {
-    fetch(this.props.domain + "home/list", {
+    const tempdomain = domain()
+    fetch(tempdomain + "home/list", {
       credentials: "include",
     })
     .then((response) => {

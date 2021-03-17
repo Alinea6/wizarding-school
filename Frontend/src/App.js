@@ -18,6 +18,7 @@ class App extends Component {
     super();
     this.state = {
       domain: "",
+      location: 1,
       user: {
         login: "",
         health_points: 0,
@@ -53,6 +54,12 @@ class App extends Component {
     });
   };
 
+  changeLocation = (data) => {
+    this.setState({
+      location: data
+    })
+  }
+
   render() {
     return (
       <BrowserRouter>
@@ -61,27 +68,23 @@ class App extends Component {
             <SignIn
               onLoggedInChange={this.onLoggedInChange}
               loggedIn={this.state.loggedIn}
-              domain={this.state.domain}
             />
           </Route>
           <Route path="/register">
-            <Register domain={this.state.domain} />
+            <Register />
           </Route>
           <Route exact path="/new">
             <Layout
               user={this.state.user}
               loadUser={this.loadUser}
-              domain={this.state.domain}
             >
-              <NewUser 
-              domain={this.state.domain}/>
+              <NewUser />
             </Layout>
           </Route>
           <Route exact path="/home">
             <Layout
               user={this.state.user}
               loadUser={this.loadUser}
-              domain={this.state.domain}
             >
               <Home />
             </Layout>
@@ -90,7 +93,6 @@ class App extends Component {
             <Layout
               user={this.state.user}
               loadUser={this.loadUser}
-              domain={this.state.domain}
             >
               <HomeRoom />
             </Layout>
@@ -99,7 +101,6 @@ class App extends Component {
             <Layout
               user={this.state.user}
               loadUser={this.loadUser}
-              domain={this.state.domain}
             >
               <HomeGarage />
             </Layout>
@@ -108,29 +109,26 @@ class App extends Component {
             <Layout
               user={this.state.user}
               loadUser={this.loadUser}
-              domain={this.state.domain}
+              changeLocation={this.changeLocation}
             >
-              <HomeCar domain={this.state.domain} />
+              <HomeCar />
             </Layout>
           </Route>
           <Route exact path="/home/list">
             <Layout
               user={this.state.user}
               loadUser={this.loadUser}
-              domain={this.state.domain}
             >
-              <HomeList domain={this.state.domain} />
+              <HomeList />
             </Layout>
           </Route>
           <Route path="/home/bathroom">
             <Layout
               user={this.state.user}
               loadUser={this.loadUser}
-              domain={this.state.domain}
             >
               <Sorting
                 fetchLink={"home/bathroom"}
-                domain={this.state.domain}
                 task={"bathroom"}
               />
             </Layout>
@@ -139,11 +137,9 @@ class App extends Component {
             <Layout
               user={this.state.user}
               loadUser={this.loadUser}
-              domain={this.state.domain}
             >
               <Sorting
                 fetchLink={"home/livingroom"}
-                domain={this.state.domain}
                 task={"livingroom"}
               />
             </Layout>
@@ -152,11 +148,9 @@ class App extends Component {
             <Layout
               user={this.state.user}
               loadUser={this.loadUser}
-              domain={this.state.domain}
             >
               <Sorting
                 fetchLink={"home/garden"}
-                domain={this.state.domain}
                 task={"garden"}
               />
             </Layout>
@@ -165,11 +159,9 @@ class App extends Component {
             <Layout
               user={this.state.user}
               loadUser={this.loadUser}
-              domain={this.state.domain}
             >
               <Sorting
                 fetchLink={"home/frontdoor"}
-                domain={this.state.domain}
                 task={"frontdoor"}
               />
             </Layout>
@@ -178,11 +170,9 @@ class App extends Component {
             <Layout
               user={this.state.user}
               loadUser={this.loadUser}
-              domain={this.state.domain}
             >
               <Sorting
                 fetchLink={"home/trunk"}
-                domain={this.state.domain}
                 task={"trunk"}
               />
             </Layout>
@@ -191,11 +181,9 @@ class App extends Component {
             <Layout
               user={this.state.user}
               loadUser={this.loadUser}
-              domain={this.state.domain}
             >
               <Sorting
                 fetchLink={"home/cleanroom"}
-                domain={this.state.domain}
                 task={"cleanroom"}
               />
             </Layout>
@@ -204,11 +192,9 @@ class App extends Component {
             <Layout
               user={this.state.user}
               loadUser={this.loadUser}
-              domain={this.state.domain}
             >
               <Sorting
                 fetchLink={"home/packtrunk"}
-                domain={this.state.domain}
                 task={"packtrunk"}
               />
             </Layout>

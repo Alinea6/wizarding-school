@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const jwtExp = require("express-jwt");
 const cors = require("cors");
 const knex = require("knex");
+const path = require('path');
 
 const getId = require("./utilities/getId");
 const queries = require("./utilities/queries");
@@ -79,7 +80,6 @@ app.put("/home/bathroom", auth.authenticate, (req, res) => {
   sorting.handleSorting(
     req,
     res,
-    database,
     "bathroom",
     "gryff",
     "slyth",
@@ -96,7 +96,6 @@ app.put("/home/livingroom", auth.authenticate, (req, res) => {
   sorting.handleSorting(
     req,
     res,
-    database,
     "livingroom",
     "huff",
     "gryff",
@@ -113,7 +112,6 @@ app.put("/home/garden", auth.authenticate, (req, res) => {
   sorting.handleSorting(
     req,
     res,
-    database,
     "garden",
     "slyth",
     "gryff",
@@ -130,7 +128,6 @@ app.put("/home/frontdoor", auth.authenticate, (req, res) => {
   sorting.handleSorting(
     req,
     res,
-    database,
     "frontdoor",
     "rav",
     "gryff",
@@ -147,7 +144,6 @@ app.put("/home/trunk", auth.authenticate, (req, res) => {
   sorting.handleSorting(
     req,
     res,
-    database,
     "trunk",
     "slyth",
     "huff",
@@ -164,7 +160,6 @@ app.put("/home/cleanroom", auth.authenticate, (req, res) => {
   sorting.handleSorting(
     req,
     res,
-    database,
     "cleanroom",
     "rav",
     "slyth",
@@ -181,7 +176,6 @@ app.put("/home/packtrunk", auth.authenticate, (req, res) => {
   sorting.handleSorting(
     req,
     res,
-    database,
     "packtrunk",
     "gryff",
     "rav",
@@ -199,8 +193,12 @@ app.get("/stats", auth.authenticate, (req, res) => {
 });
 
 app.get("/home/car", auth.authenticate, (req, res) => {
-  homeCar.handleCar(req, res, getId, queries);
+  homeCar.handleCar(req, res);
 });
+
+app.get("/home/ride", auth.authenticate, (req, res) => {
+  homeCar.handleRide(req, res);
+})
 
 app.listen(3003, () => {
   console.log("app is running on port 3003");

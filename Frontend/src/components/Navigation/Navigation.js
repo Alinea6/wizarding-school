@@ -1,10 +1,12 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import domain from '../../Config';
 import "./Navigation.css";
 
 class Navigation extends React.Component {
   onLoggedOut = () => {
-    fetch(this.props.domain + 'logout', {
+    const tempdomain = domain()
+    fetch(tempdomain + 'logout', {
       credentials: "include",
     }).then(response => {
       window.location.href = 'http://localhost:3000/login'

@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import domain from "../../Config";
 
 class Sorting extends React.Component {
   constructor() {
@@ -17,7 +18,8 @@ class Sorting extends React.Component {
   }
 
   componentDidMount() {
-    fetch(this.props.domain + this.props.fetchLink, {
+    const tempdomain = domain();
+    fetch(tempdomain + this.props.fetchLink, {
       credentials: "include",
     })
       .then((response) => {
@@ -46,20 +48,27 @@ class Sorting extends React.Component {
   }
 
   onChoiceClick(choice) {
-    fetch(this.props.domain + this.props.fetchLink, {
+    const tempdomain = domain();
+    fetch(tempdomain + this.props.fetchLink, {
       method: "put",
       credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         choice: choice,
       }),
-    }).then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        window.location.href = "http://localhost:3000/login";
-      }
-    });
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          window.location.href = "http://localhost:3000/login";
+        }
+      })
+      .then((data) => {
+        if (data.homeTasks[this.props.task]) {
+          this.setState({ taskDone: true });
+        }
+      });
   }
 
   render() {

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import domain from '../../Config';
 
 class Register extends React.Component {
   constructor() {
@@ -24,7 +25,8 @@ class Register extends React.Component {
   };
 
   onSubmitRegister = () => {
-    fetch(this.props.domain + "register", {
+    const tempdomain = domain()
+    fetch(tempdomain + "register", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

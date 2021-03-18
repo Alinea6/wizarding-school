@@ -29,6 +29,11 @@ class HomeList extends React.Component {
         window.location.href = 'http://localhost:3000/login'; 
       }})
       .then((data) => {
+        if (data.zone_id === 2) {
+          window.location.href = "http://localhost:3000/london";
+        } else if (data.zone_id === 3) {
+          window.location.href = "http://localhost:3000/hogwart";
+        }
         this.setState({
           bathroomTask: data.list.bathroom,
           livingroomTask: data.list.livingroom,

@@ -30,6 +30,11 @@ class Sorting extends React.Component {
         }
       })
       .then((data) => {
+        if (data.zone_id === 2) {
+          window.location.href = "http://localhost:3000/london";
+        } else if (data.zone_id === 3) {
+          window.location.href = "http://localhost:3000/hogwart";
+        }
         this.setState({
           introduction: data.introduction,
           choice1: data.choice1,

@@ -6,7 +6,6 @@ const jwt = require("jsonwebtoken");
 const jwtExp = require("express-jwt");
 const cors = require("cors");
 const knex = require("knex");
-const path = require('path');
 
 const getId = require("./utilities/getId");
 const queries = require("./utilities/queries");
@@ -26,6 +25,7 @@ const homeCleanRoom = require("./controllers/homeCleanRoom");
 const homePackTrunk = require("./controllers/homePackTrunk");
 const homeList = require("./controllers/homeList");
 const homeCar = require("./controllers/homeCar");
+const home = require("./controllers/home");
 
 const accessTokenSecret = "429c55d5763d8ef60444a7faf993b285";
 
@@ -198,6 +198,10 @@ app.get("/home/car", auth.authenticate, (req, res) => {
 
 app.get("/home/ride", auth.authenticate, (req, res) => {
   homeCar.handleRide(req, res);
+})
+
+app.get("/home", auth.authenticate, (req, res) => {
+  home.handleHome(req, res);
 })
 
 app.listen(3003, () => {

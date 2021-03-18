@@ -86,7 +86,7 @@ class App extends Component {
               user={this.state.user}
               loadUser={this.loadUser}
             >
-              <Home />
+              <Home/>
             </Layout>
           </Route>
           <Route exact path="/home/room">

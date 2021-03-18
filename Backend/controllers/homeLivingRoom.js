@@ -25,18 +25,22 @@ const sendHomeLivingRoom = (req, res) => {
     zajrzyj na listę, która znajduje się w Twoim pokoju.`;
   const token = req.cookies.token;
   const id = getId.getId(token);
-  const userData = queries.getUserData("house_tasks", id);
-  userData.then((data) =>
-    res.json({
-      introduction: introduction,
-      choice1: choice1,
-      choice2: choice2,
-      choice3: choice3,
-      choice4: choice4,
-      taskDoneText: taskDoneText,
-      homeTasks: data[0],
-    })
-  );
+  const userZone = queries.getUserData("user_location_data", id);
+  userZone.then((zoneData) => {
+    const userData = queries.getUserData("house_tasks", id);
+    userData.then((data) =>
+      res.json({
+        introduction: introduction,
+        choice1: choice1,
+        choice2: choice2,
+        choice3: choice3,
+        choice4: choice4,
+        taskDoneText: taskDoneText,
+        homeTasks: data[0],
+        zone_id: zoneData[0]["zone_id"],
+      })
+    );
+  });
 };
 
 module.exports = {

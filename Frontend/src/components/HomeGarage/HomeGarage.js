@@ -1,8 +1,30 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import domain from "../../Config";
 
 class HomeGarage extends React.Component {
+  componentDidMount() {
+    const tempdomain = domain();
+    fetch(tempdomain + "home", {
+      credentials: "include",
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          window.location.href = "http://localhost:3000/login";
+        }
+      })
+      .then((data) => {
+        if (data.zone_id === 2) {
+          window.location.href = "http://localhost:3000/london";
+        } else if (data.zone_id === 3) {
+          window.location.href = "http://localhost:3000/hogwart";
+        }
+      });
+  }
+  
   render() {
     return (
       <Container className="ba bw2 bg-black">

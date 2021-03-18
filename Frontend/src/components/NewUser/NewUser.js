@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import domain from '../../Config';
+import domain from "../../Config";
 
 class NewUser extends React.Component {
   constructor() {
@@ -12,7 +12,7 @@ class NewUser extends React.Component {
   }
 
   componentDidMount() {
-    const tempdomain = domain()
+    const tempdomain = domain();
     fetch(tempdomain + "new", {
       credentials: "include",
     })
@@ -24,6 +24,11 @@ class NewUser extends React.Component {
         }
       })
       .then((data) => {
+        if (data.zone_id === 2) {
+          window.location.href = "http://localhost:3000/london";
+        } else if (data.zone_id === 3) {
+          window.location.href = "http://localhost:3000/hogwart";
+        }
         this.setState({
           text: data.text,
         });

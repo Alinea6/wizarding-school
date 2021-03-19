@@ -10,6 +10,8 @@ import HomeGarage from "./components/HomeGarage/HomeGarage";
 import HomeList from "./components/HomeList/HomeList";
 import HomeRoom from "./components/HomeRoom/HomeRoom";
 import Sorting from "./components/Sorting/Sorting";
+import London from "./components/London/London";
+import LondonStation from "./components/LondonStation/LondonStation";
 import domain from "./Config";
 import "./App.css";
 
@@ -18,7 +20,6 @@ class App extends Component {
     super();
     this.state = {
       domain: "",
-      location: 1,
       user: {
         login: "",
         health_points: 0,
@@ -54,12 +55,6 @@ class App extends Component {
     });
   };
 
-  changeLocation = (data) => {
-    this.setState({
-      location: data
-    })
-  }
-
   render() {
     return (
       <BrowserRouter>
@@ -87,6 +82,14 @@ class App extends Component {
               loadUser={this.loadUser}
             >
               <Home/>
+            </Layout>
+          </Route>
+          <Route exact path="/london">
+            <Layout
+              user={this.state.user}
+              loadUser={this.loadUser}
+            >
+              <London/>
             </Layout>
           </Route>
           <Route exact path="/home/room">
@@ -197,6 +200,14 @@ class App extends Component {
                 fetchLink={"home/packtrunk"}
                 task={"packtrunk"}
               />
+            </Layout>
+          </Route>
+          <Route path="/london/station">
+            <Layout
+              user={this.state.user}
+              loadUser={this.loadUser}
+            >
+              <LondonStation/>
             </Layout>
           </Route>
           <Route exact path="/">

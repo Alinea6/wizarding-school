@@ -40,7 +40,7 @@ const handleRide = (req, res) => {
     .then((data) => {
       for (let room in data[0]) {
         if (!data[0][room]) {
-          res.json({
+          return res.json({
             homeDone: false,
             text: `Niestety nie możesz jeszcze jechać do Londynu, 
             ponieważ nie skończyłeś przygotowywać się do wyjazdu. 
@@ -58,7 +58,7 @@ const handleRide = (req, res) => {
       );
       updatePromise
         .then((data) => {
-          res.json({ zoneId: data[0]["zone_id"] });
+          res.json({ zone_id: data[0]["zone_id"] });
         })
         .catch((err) => res.json("Error updating data"));
     })

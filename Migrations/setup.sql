@@ -5,11 +5,14 @@ CREATE TABLE IF NOT EXISTS login_data (
     password TEXT NOT NULL
 );
 
+CREATE TYPE user_status_t AS enum('nieprzydzielony', 'uczeń', 'prefekt', 'prefekt naczelny', 'profesor', 'wicedyrektor', 'dyrektor');
+
 CREATE TABLE IF NOT EXISTS user_metadata (
     user_id UUID REFERENCES login_data (user_id),
     email TEXT UNIQUE NOT NULL,
     joined TIMESTAMP NOT NULL,
-    new_user BOOL DEFAULT TRUE
+    new_user BOOL DEFAULT TRUE,
+    user_status user_status_t NOT NULL DEFAULT 'nieprzydzielony'
 );
 
 

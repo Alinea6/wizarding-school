@@ -3,18 +3,10 @@ import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import domain from "../../Config";
 
-class HomeCar extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      homeDone: false,
-      text: "",
-    };
-  }
-
+class LondonStation extends React.Component {
   componentDidMount() {
     const tempdomain = domain();
-    fetch(tempdomain + "home/car", {
+    fetch(tempdomain + "home", {
       credentials: "include",
     })
       .then((response) => {
@@ -25,24 +17,17 @@ class HomeCar extends React.Component {
         }
       })
       .then((data) => {
-        if (data.zone_id === 2) {
-          window.location.href = "http://localhost:3000/london";
+        if (data.zone_id === 1) {
+          window.location.href = "http://localhost:3000/home";
         } else if (data.zone_id === 3) {
           window.location.href = "http://localhost:3000/hogwart";
         }
-        this.setState({
-          homeDone: data.homeDone,
-          text: data.text,
-        });
-      })
-      .catch((error) => {
-        "Error";
       });
   }
 
-  goToLondon = () => {
+  goToHogwart = () => {
     const tempdomain = domain();
-    fetch(tempdomain + "home/ride", {
+    fetch(tempdomain + "london/train", {
       credentials: "include",
     })
       .then((response) => {
@@ -53,13 +38,12 @@ class HomeCar extends React.Component {
         }
       })
       .then((data) => {
-        if (data.zone_id === 2) {
-          window.location.href = "http://localhost:3000/london";
-        } else {
-          this.setState({
-            homeDone: data.homeDone,
-            text: data.text,
-          });
+        if (data.zone_id === 3) {
+          if (data.student) {
+            window.location.href = "http://localhost:3000/hogwart";
+          } else {
+            window.location.href = "http://localhost:3000/hogwart/sorting";
+          }
         }
       });
   };
@@ -69,26 +53,21 @@ class HomeCar extends React.Component {
       <Container className="ba bw2 bg-black">
         <Row className="pa0 ba">
           <Col className="pa0">
-            <p className="tc f4 moon-gray pa0">Dom</p>
+            <p className="tc f4 moon-gray pa0">Londyn</p>
           </Col>
         </Row>
         <Container className="pa1">
           <Row>
-            <p className="tj moon-gray pa1">{this.state.text}</p>
-            {this.state.homeDone ? (
-              <ul>
-                <li
-                  className="moon-gray link hover: dim pointer pa1"
-                  onClick={this.goToLondon}
-                >
-                  Wsiądź do samochodu
-                </li>
-              </ul>
-            ) : (
-              <p></p>
-            )}
+            <ul>
+              <li
+                onClick={this.goToHogwart}
+                className="moon-gray f5 link hover: dim pointer"
+              >
+                Jedź do Hogwartu z peronu 9 3/4
+              </li>
+            </ul>
           </Row>
-          <Link exact to="/home" style={{ textDecoration: "none" }}>
+          <Link exact={+true} to="/london" style={{ textDecoration: "none" }}>
             <p className="moon-gray pa0 link hover: dim pointer">Powrót</p>
           </Link>
         </Container>
@@ -97,4 +76,4 @@ class HomeCar extends React.Component {
   }
 }
 
-export default HomeCar;
+export default LondonStation;

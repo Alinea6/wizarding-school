@@ -1,5 +1,11 @@
 const server = require("../server.js");
 
+async function insertData(table, newData) {
+  const resp = await server.database(table)
+  .insert(newData)
+  return resp
+}
+
 async function getUserData(table, id) {
   const resp = await server.database
     .select("*")
@@ -71,6 +77,7 @@ async function getIdAndLogin(login) {
 }
 
 module.exports = {
+  insertData: insertData,
   getUserData: getUserData,
   incrementUserData: incrementUserData,
   updateUserData: updateUserData,

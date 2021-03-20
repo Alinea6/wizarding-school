@@ -26,6 +26,8 @@ const homePackTrunk = require("./controllers/homePackTrunk");
 const homeList = require("./controllers/homeList");
 const homeCar = require("./controllers/homeCar");
 const home = require("./controllers/home");
+const londonTrain = require("./controllers/londonTrain");
+const hogwartSorting = require("./controllers/hogwartSorting");
 
 const accessTokenSecret = "429c55d5763d8ef60444a7faf993b285";
 
@@ -202,6 +204,22 @@ app.get("/home/ride", auth.authenticate, (req, res) => {
 
 app.get("/home", auth.authenticate, (req, res) => {
   home.handleHome(req, res);
+})
+
+app.get("/london/train", auth.authenticate, (req, res) => {
+  londonTrain.handleTrain(req, res)
+})
+
+app.get("/hogwart/beforesorting", auth.authenticate, (req, res) => {
+  hogwartSorting.handleBeforeSorting(req, res)
+})
+
+app.get("/hogwart/sorting", auth.authenticate, (req, res) => {
+  hogwartSorting.handleSorting(req, res)
+})
+
+app.put("/hogwart/sorting", auth.authenticate, (req, res) => {
+  hogwartSorting.handleHatstall(req, res)
 })
 
 app.listen(3003, () => {

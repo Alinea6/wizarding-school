@@ -12,6 +12,7 @@ import HomeRoom from "./components/HomeRoom/HomeRoom";
 import Sorting from "./components/Sorting/Sorting";
 import London from "./components/London/London";
 import LondonStation from "./components/LondonStation/LondonStation";
+import HogwartSorting from "./components/HogwartSorting/HogwartSorting";
 import domain from "./Config";
 import "./App.css";
 
@@ -208,6 +209,14 @@ class App extends Component {
               loadUser={this.loadUser}
             >
               <LondonStation/>
+            </Layout>
+          </Route>
+          <Route path="/hogwart/sorting">
+            <Layout
+              user={this.state.user}
+              loadUser={this.loadUser}
+            >
+              <HogwartSorting/>
             </Layout>
           </Route>
           <Route exact path="/">

@@ -26,11 +26,13 @@ class LondonStation extends React.Component {
   }
 
   goToHogwart = () => {
+    console.log("found function")
     const tempdomain = domain();
     fetch(tempdomain + "london/train", {
       credentials: "include",
     })
       .then((response) => {
+        console.log(response)
         if (response.ok) {
           return response.json();
         } else {
@@ -38,6 +40,7 @@ class LondonStation extends React.Component {
         }
       })
       .then((data) => {
+        console.log(data)
         if (data.zone_id === 3) {
           if (data.student) {
             window.location.href = "http://localhost:3000/hogwart";
@@ -53,7 +56,7 @@ class LondonStation extends React.Component {
       <Container className="ba bw2 bg-black">
         <Row className="pa0 ba">
           <Col className="pa0">
-            <p className="tc f4 moon-gray pa0">Londyn</p>
+            <p className="tc f4 moon-gray pa0">Stacja King's Cross</p>
           </Col>
         </Row>
         <Container className="pa1">

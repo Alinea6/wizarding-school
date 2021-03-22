@@ -50,7 +50,7 @@ class NewUser extends React.Component {
           <Row>
             <p className="tj pa1 moon-gray">{this.state.text}</p>
           </Row>
-          <Link exact to="/home" style={{ textDecoration: "none" }}>
+          <Link exact={+true} to="/home" style={{ textDecoration: "none" }}>
             <p className="moon-gray pa0 link hover: dim pointer">Kontynuuj</p>
           </Link>
         </Container>

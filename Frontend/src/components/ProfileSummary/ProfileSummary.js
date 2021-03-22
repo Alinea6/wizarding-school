@@ -33,9 +33,13 @@ class ProfileSummary extends React.Component {
         const actionPercentage = Math.round(
           (data.action_points / data.max_action_points) * 100
         );
+        const experiencePercentage = Math.round(
+          (data.experience_points / data.nextLevel)*100
+        );
         this.setState({
           healthPercentage: healthPercentage,
           actionPercentage: actionPercentage,
+          experiencePercentage: experiencePercentage
         });
       })
       .catch((error) => {
@@ -58,7 +62,7 @@ class ProfileSummary extends React.Component {
             <p className="pa0 f7 light-silver">{`Punkty Życia: ${this.props.user.health_points}/${this.props.user.max_health_points}`}</p>
           </Col>
           <Col xs={6} sm={6} md={6} lg={6} xl={6} className="pa0 bg-black">
-            <p className="pa0 f7 light-silver">{"Dom: nieprzydzielony"}</p>
+            <p className="pa0 f7 light-silver">{`Dom: ${this.props.user.house}`}</p>
           </Col>
         </Row>
         <Row className="pa0">
@@ -80,7 +84,7 @@ class ProfileSummary extends React.Component {
             <p className="pa0 f7 light-silver">{`Punkty Akcji: ${this.props.user.action_points}/${this.props.user.max_action_points}`}</p>
           </Col>
           <Col xs={6} sm={6} md={6} lg={6} xl={6} className="pa0 bg-black">
-            <p className="pa0 f7 light-silver">{"Pieniądze: 0g 0s 0k"}</p>
+            <p className="pa0 f7 light-silver">{`Pieniądze: ${this.props.user.pocket.g}g ${this.props.user.pocket.s}s ${this.props.user.pocket.k}k`}</p>
           </Col>
         </Row>
         <Row className="pa0">
@@ -92,20 +96,20 @@ class ProfileSummary extends React.Component {
             />
           </Col>
           <Col xs={6} sm={6} md={6} lg={6} xl={6} className="pa0 bg-black">
-            <p className="pa0 f7 light-silver">{"Skrytka: 0g 0s 0k"}</p>
+            <p className="pa0 f7 light-silver">{`Skrytka: ${this.props.user.vault.g}g ${this.props.user.vault.s}s ${this.props.user.vault.k}k`}</p>
           </Col>
         </Row>
         <Row className="pa0">
           <Col xs={6} sm={6} md={6} lg={6} xl={6} className="pa0 bg-black">
-            <p className="pa0 f7 light-silver">{`Doświadczenie: ${this.props.user.experience_points}/100`}</p>
+            <p className="pa0 f7 light-silver">{`Doświadczenie: ${this.props.user.experience_points}/${this.props.user.nextLevel}`}</p>
           </Col>
           <Col xs={6} sm={6} md={6} lg={6} xl={6} className="pa0 bg-black">
-            <p className="pa0 f7 light-silver">{"Poziom: 1"}</p>
+            <p className="pa0 f7 light-silver">{`Poziom: ${this.props.user.level}`}</p>
           </Col>
         </Row>
         <Row className="pa0">
           <Col xs={6} sm={6} md={6} lg={6} xl={6} className="pa0 bg-black">
-            <ProgressBar striped variant="warning" now={0} />
+            <ProgressBar striped variant="warning" now={this.state.experiencePercentage} />
           </Col>
           <Col xs={6} sm={6} md={6} lg={6} xl={6} className="pa0 bg-black">
             <p className="pa0 f6 light-silver"></p>

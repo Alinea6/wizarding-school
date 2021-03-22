@@ -30,7 +30,7 @@ class HomeGarage extends React.Component {
       <Container className="ba bw2 bg-black">
         <Row className="pa0 ba">
           <Col className="pa0">
-            <p className="tc f4 moon-gray pa0">Dom</p>
+            <p className="tc f4 moon-gray pa0">Garaż</p>
           </Col>
         </Row>
         <Container className="pa1">
@@ -48,7 +48,7 @@ class HomeGarage extends React.Component {
               </Link>
             </ul>
           </Row>
-          <Link exact to="/home" style={{ textDecoration: "none" }}>
+          <Link exact={+true} to="/home" style={{ textDecoration: "none" }}>
             <p className="moon-gray pa0 link hover: dim pointer">Powrót</p>
           </Link>
         </Container>

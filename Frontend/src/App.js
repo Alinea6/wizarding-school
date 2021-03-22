@@ -28,8 +28,11 @@ class App extends Component {
         action_points: 0,
         max_action_points: 0,
         experience_points: 0,
-        pocket: 0,
-        vault: 0,
+        pocket: {},
+        vault: {},
+        house: '',
+        level: 0,
+        nextLevel: 0
       },
     };
   }
@@ -52,6 +55,9 @@ class App extends Component {
         experience_points: data.experience_points,
         pocket: data.pocket,
         vault: data.vault,
+        house: data.house,
+        level: data.level,
+        nextLevel: data.nextLevel
       },
     });
   };
@@ -134,6 +140,7 @@ class App extends Component {
               <Sorting
                 fetchLink={"home/bathroom"}
                 task={"bathroom"}
+                location={"Łazienka"}
               />
             </Layout>
           </Route>
@@ -145,6 +152,7 @@ class App extends Component {
               <Sorting
                 fetchLink={"home/livingroom"}
                 task={"livingroom"}
+                location={"Salon"}
               />
             </Layout>
           </Route>
@@ -156,6 +164,7 @@ class App extends Component {
               <Sorting
                 fetchLink={"home/garden"}
                 task={"garden"}
+                location={"Ogród"}
               />
             </Layout>
           </Route>
@@ -167,6 +176,7 @@ class App extends Component {
               <Sorting
                 fetchLink={"home/frontdoor"}
                 task={"frontdoor"}
+                location={"Ulica"}
               />
             </Layout>
           </Route>
@@ -178,6 +188,7 @@ class App extends Component {
               <Sorting
                 fetchLink={"home/trunk"}
                 task={"trunk"}
+                location={"Twój pokój"}
               />
             </Layout>
           </Route>
@@ -189,6 +200,7 @@ class App extends Component {
               <Sorting
                 fetchLink={"home/cleanroom"}
                 task={"cleanroom"}
+                location={"Twój pokój"}
               />
             </Layout>
           </Route>
@@ -200,6 +212,7 @@ class App extends Component {
               <Sorting
                 fetchLink={"home/packtrunk"}
                 task={"packtrunk"}
+                location={"Garaż"}
               />
             </Layout>
           </Route>

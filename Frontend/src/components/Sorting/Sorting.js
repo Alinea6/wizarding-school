@@ -81,7 +81,7 @@ class Sorting extends React.Component {
       <Container className="ba bw2 bg-black">
         <Row className="pa0 ba">
           <Col className="pa0">
-            <p className="tc f4 moon-gray pa0">Dom</p>
+            <p className="tc f4 moon-gray pa0">{this.props.location}</p>
           </Col>
         </Row>
         {!this.state.taskDone ? (
@@ -117,7 +117,7 @@ class Sorting extends React.Component {
                 </li>
               </ul>
             </Row>
-            <Link exact to="/home" style={{ textDecoration: "none" }}>
+            <Link exact={+true} to="/home" style={{ textDecoration: "none" }}>
               <p className="moon-gray pa1 link hover: dim pointer">Powrót</p>
             </Link>
           </Container>
@@ -127,7 +127,7 @@ class Sorting extends React.Component {
               <p className="tj pa2 moon-gray">{this.state.taskDoneText}</p>
             </Row>
             <Row style={{ justifyContent: "center" }}>
-              <Link exact to="/home" style={{ textDecoration: "none" }}>
+              <Link exact={+true} to="/home" style={{ textDecoration: "none" }}>
                 <p className="moon-gray pa1 link hover: dim pointer">Powrót</p>
               </Link>
             </Row>
